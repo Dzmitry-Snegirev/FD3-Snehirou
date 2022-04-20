@@ -1,17 +1,18 @@
 var ItemShop = React.createClass({
 
 	displayName: 'ItemShop',
-	/*
-		getDefaultProps: function() {
-			return { question: "Вопрос ни о чём" }
-		},
-	*/
+
+	propTypes: {
+		names: React.PropTypes.array.isRequired,
+		catalog: React.PropTypes.array.isRequired,
+	},
+
+
 	render: function () {
 
 		var catalogNamesCodes = [];
 
 		this.props.names.forEach(v => catalogNamesCodes.push(React.DOM.th({ key: v.code, className: 'itemName' }, v.name)));
-
 
 		/*
 				var catalogNamesCodes = [];
@@ -35,6 +36,7 @@ var ItemShop = React.createClass({
 			React.DOM.td({ className: 'Text' }, l.price),
 			React.DOM.td({ className: 'Foto' }, React.DOM.img({ className: 'FotoItem', src: l.foto })),
 		)));
+
 		/*
 				for (var i = 0; i < this.props.catalog.length; i++) {
 					var catalogItem = this.props.catalog[i];
