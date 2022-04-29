@@ -57,3 +57,14 @@ var ItemShop = React.createClass({
 	},
 
 });
+
+
+var summation = function (num) {
+	let sum;
+	let acc;
+	for (i = 1; i < num; i++) {
+		acc = i + 1;
+		sum += acc;
+	}
+	return sum;
+}
