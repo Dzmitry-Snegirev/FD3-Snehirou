@@ -2,60 +2,62 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <title>ItemShop</title>
+	<meta charset="utf-8" />
+	<title>ItemShop</title>
 </head>
 
 <body>
-    <div id="container"></div>
+	<div id="container"></div>
 
-    <script src="https://unpkg.com/react@15/dist/react.js"></script>
-    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+	<script src="https://unpkg.com/react@15/dist/react.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
 
-    <script src="filter.js"></script>
-    <link rel="stylesheet" type="text/css" href="filter.css" />
+	<script src="filter.js"></script>
+	<link rel="stylesheet" type="text/css" href="filter.css" />
 
-    <script>
-        ['california', 'everything', 'aboveboard', 'washington', 'basketball', 'weathering', 'characters', 'literature', 'contraband', 'appreciate'];
-        var cityArr = [{
-            name: 'california',
-            code: 1
-        }, {
-            name: 'everything',
-            code: 2
-        }, {
-            name: 'aboveboard',
-            code: 3
-        }, {
-            name: 'washington',
-            code: 4
-        }, {
-            name: 'basketball',
-            code: 5
-        }, {
-            name: 'weathering',
-            code: 6
-        }, {
-            name: 'characters',
-            code: 7
-        }, {
-            name: 'literature',
-            code: 8
-        }, {
-            name: 'contraband',
-            code: 9
-        }, {
-            name: 'appreciate',
-            code: 10
-        }, ];
+	<script>
+		// ['california', 'everything', 'aboveboard', 'washington', 'basketball', 'weathering', 'characters', 'literature', 'contraband', 'appreciate'];
+		var cityArr = [{
+			name: 'california',
+			code: 1
+		}, {
+			name: 'everything',
+			code: 2
+		}, {
+			name: 'aboveboard',
+			code: 3
+		}, {
+			name: 'washington',
+			code: 4
+		}, {
+			name: 'basketball',
+			code: 5
+		}, {
+			name: 'weathering',
+			code: 6
+		}, {
+			name: 'characters',
+			code: 7
+		}, {
+			name: 'literature',
+			code: 8
+		}, {
+			name: 'contraband',
+			code: 9
+		}, {
+			name: 'appreciate',
+			code: 10
+		},];
+		var searchedStr = "";
+		ReactDOM.render(
+			React.createElement(Filter, {
+				startText: searchedStr,
+				words: cityArr,
 
-        ReactDOM.render(
-            React.createElement(Filter, {
-                words: cityArr,
-            }),
-            document.getElementById('container')
-        );
-    </script>
+			}),
+			document.getElementById('container')
+		);
+	</script>
 
 </body>
 
