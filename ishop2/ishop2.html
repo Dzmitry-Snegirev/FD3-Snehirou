@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>ItemShop</title>
+</head>
+
+<body>
+	<div id="container"></div>
+
+	<script src="https://unpkg.com/react@15/dist/react.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+
+	<script src="shop.js"></script>
+	<script src="products.js"></script>
+	<link rel="stylesheet" type="text/css" href="ishop.css" />
+
+	<script>
+
+
+		var catalogNameArr = [
+			{ name: 'Название', code: 1 },
+			{ name: 'Цена', code: 2 },
+			{ name: 'Количесвто', code: 3 },
+			{ name: 'Фото', code: 4 },
+			{ name: 'Контроль', code: 5 },
+		];
+		var catalogItemsArr = [
+			{ text: 'апельсины', code: 1, count: 30, price: 100, foto: 'image/orange.jpg' },
+			{ text: 'бананы', code: 2, count: 40, price: 110, foto: 'image/banans.jpg' },
+			{ text: 'яблоки', code: 3, count: 50, price: 70, foto: 'image/apple.jpg' },
+			{ text: 'груши', code: 4, count: 45, price: 80, foto: 'image/grushi1.jpg' },
+			{ code: 5, },
+		];
+
+		ReactDOM.render(
+			React.createElement(Shop, { names: catalogNameArr }),
+			document.getElementById('container')
+		);
+	</script>
+
+</body>
+
+</html>
