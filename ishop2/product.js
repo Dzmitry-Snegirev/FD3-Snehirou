@@ -1,41 +1,43 @@
 var ProductLine = React.createClass({
 
-    displayName: 'ProductLine',
-    /*
-    	propTypes: {
-    		names: React.PropTypes.array.isRequired,
-    		catalog: React.PropTypes.array.isRequired,
-    	},
-    */
+	displayName: 'ProductLine',
 
-    selectLine: function(code) {
-        this.props.cbSelected(code);
-    },
-    del: function(eo) {
-        eo.stopPropagation();
-        this.props.cbdel(this.props.code);
-    },
+	propTypes: {
+		text: React.PropTypes.string.isRequired,
+		count: React.PropTypes.number.isRequired,
+		price: React.PropTypes.number.isRequired,
+		code: React.PropTypes.number.isRequired,
 
 
+	},
 
 
-    render: function() {
+	selectLine: function (eo) {
+		this.props.cbSelected(this.props.code);
+	},
+	delLine: function (eo) {
+		const conf = confirm(`Вы уверены?`);
+		eo.stopPropagation();
+		conf ? this.props.cbdel(this.props.code) : this.selectLine
+	},
 
 
-        var catalogItemsCodes = [];
-        this.props.pack.forEach(l => catalogItemsCodes.push(React.DOM.tr({
-                key: l.code,
-                className: 'info',
-                onClick: () => this.selectLine(l.code),
-                style: { backgroundColor: (this.props.startCode === l.code) ? 'orange' : 'white' }
-            },
-            React.DOM.td({ className: 'Text' }, l.text, ),
-            React.DOM.td({ className: 'Count' }, l.count, ),
-            React.DOM.td({ className: 'Text' }, l.price, ),
-            React.DOM.td({ className: 'Foto' }, React.DOM.img({ className: 'FotoItem', src: l.foto })),
-            React.DOM.td({ className: 'button' }, React.DOM.input({ className: 'reset', type: "button", value: "Удалить", onClick: this.del })),
-        )));
 
-        return React.DOM.tbody({ className: 'items' }, catalogItemsCodes);
-    },
+
+	render: function () {
+		return React.DOM.tbody({ className: 'items' },
+			React.DOM.tr({
+				className: 'info', onClick: this.selectLine,
+				style: { backgroundColor: (this.props.startCode === this.props.code) ? 'orange' : 'white' }
+			},
+				React.DOM.td({ className: 'Text' }, this.props.text,),
+				React.DOM.td({ className: 'Count' }, this.props.count,),
+				React.DOM.td({ className: 'Text' }, this.props.price,),
+				React.DOM.td({ className: 'Foto' }, React.DOM.img({ className: 'FotoItem', src: this.props.foto })),
+				React.DOM.td({ className: 'button' }, React.DOM.input({ className: 'reset', type: "button", value: "Удалить", onClick: this.delLine })),
+			))
+	},
 });
+
+
+
