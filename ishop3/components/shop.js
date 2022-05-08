@@ -1,8 +1,9 @@
-var React = require('react');
+import React from 'react';
 
-require('./ishop.css');
+import './ishop.css';
 
-var ProductLine = require('./product');
+import ProductLine from './product';
+
 
 var Shop = React.createClass({
 
@@ -49,4 +50,4 @@ var Shop = React.createClass({
 	},
 });
 
-module.exports = Shop;
+export default Shop;
