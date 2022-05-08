@@ -1,0 +1,30 @@
+[
+	{
+		"text": "апельсины",
+		"code": "1",
+		"count": "30",
+		"price": "100",
+		"foto": "image/orange.jpg"
+	},
+	{
+		"text": "бананы",
+		"code": "2",
+		"count": "40",
+		"price": "110",
+		"foto": "image/banans.jpg"
+	},
+	{
+		"text": "яблоки",
+		"code": "3",
+		"count": "50",
+		"price": "70",
+		"foto": "image/apple.jpg"
+	},
+	{
+		"text": "груши",
+		"code": "4",
+		"count": "45",
+		"price": "80",
+		"foto": "image/grushi1.jpg"
+	}
+]

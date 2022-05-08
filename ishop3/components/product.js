@@ -1,6 +1,7 @@
-var React = require('react');
+import React from 'react';
 
-require('./product.css');
+import './product.css';
+
 
 var ProductLine = React.createClass({
 
@@ -43,5 +44,6 @@ var ProductLine = React.createClass({
 	},
 });
 
-module.exports = ProductLine;
+export default ProductLine;
+
 
