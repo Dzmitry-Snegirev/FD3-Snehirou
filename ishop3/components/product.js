@@ -15,8 +15,13 @@ class ProductLine extends React.Component {
 
 	selectLine = (eo) => {
 		this.props.cbSelected(this.props.code);
-
+		this.props.cbcard(this.props.code);
 	}
+
+	// selectcard = (eo) => {
+	// 	this.props.cbSelected(this.props.code);
+	// 	this.props.cbcard(this.props.code);
+	// }
 
 	delLine = (eo) => {
 		const conf = confirm(`Вы уверены?`);
@@ -36,26 +41,14 @@ class ProductLine extends React.Component {
 					<img className={'FotoItem'} src={this.props.foto}></img>
 				</td>
 				<td className={'button'}>
-					<input className={'edit'} type={'button'} value={'Редактирвать'} onClick={this.delLine}></input>
+					<input className={'edit'} type={'button'} value={'Редактировать'} onClick={this.selectLine}
+						style={{ backgroundColor: (this.props.startCode === this.props.code) ? 'orange' : 'white' }}>
+					</input>
 					<input className={'reset'} type={'button'} value={'Удалить'} onClick={this.delLine}></input>
 				</td>
 			</tr>
 
-
 		</tbody>)
-
-
-		return React.DOM.tbody({ className: 'items' },
-			React.DOM.tr({
-				className: 'info', onClick: this.selectLine,
-				style: { backgroundColor: (this.props.startCode === this.props.code) ? 'orange' : 'white' }
-			},
-				React.DOM.td({ className: 'Text' }, this.props.text,),
-				React.DOM.td({ className: 'Count' }, this.props.count,),
-				React.DOM.td({ className: 'Text' }, this.props.price,),
-				React.DOM.td({ className: 'Foto' }, React.DOM.img({ className: 'FotoItem', src: this.props.foto })),
-				React.DOM.td({ className: 'button' }, React.DOM.input({ className: 'reset', type: "button", value: "Удалить", onClick: this.delLine })),
-			))
 	}
 };
 

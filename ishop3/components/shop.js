@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './ishop.css';
 
 import ProductLine from './product';
+import ItemCard from './itemCard';
 
 
 class Shop extends React.Component {
@@ -16,6 +17,7 @@ class Shop extends React.Component {
 	state = {
 		selectedLineCode: null,
 		startPack: this.props.items,
+		startCardPack: this.props.items,
 	}
 	selected = (key) => {
 		this.setState({ selectedLineCode: key });
@@ -30,6 +32,12 @@ class Shop extends React.Component {
 			this.setState({ startPack: copyStartPack });
 	*/
 	}
+	card = (code) => {
+		this.setState({
+			startCardPack: this.state.startCardPack.filter(n => n.code === code)
+		});
+	}
+
 	render() {
 		var catalogNamesCodes = [];
 		this.props.names.forEach(v => catalogNamesCodes.push(<th key={v.code} className={'itemName'}>{v.name}</th>));
@@ -45,11 +53,23 @@ class Shop extends React.Component {
 					(<ProductLine
 						key={n.code}
 						code={n.code} text={n.text} count={n.count}
-						price={n.price} foto={n.foto} cbSelected={this.selected} startCode={this.state.selectedLineCode} cbdel={this.del} />
+						price={n.price} foto={n.foto} cbSelected={this.selected} startCode={this.state.selectedLineCode} cbdel={this.del} cbcard={this.card} />
 					)
 					)}
 				</table>
 				<input className={'newProduct'} type={'button'} value={'Новый'} ></input>
+				{
+					this.state.selectedLineCode
+					&&
+					this.state.startCardPack.map(p =>
+					(<ItemCard
+						key={p.code}
+						code={p.code} text={p.text} count={p.count}
+						price={p.price} />
+					)
+					)
+
+				}
 			</div>
 		)
 	}
