@@ -9,10 +9,9 @@ var catalogNameArr = require('./catalogNameArr.json');
 var catalogItemsArr = require('./catalogItemsArr.json');
 
 ReactDOM.render(
-	React.createElement(Shop, {
-		names: catalogNameArr,
-		items: catalogItemsArr,
-	}),
-	document.getElementById('container')
+	<Shop
+		names={catalogNameArr}
+		items={catalogItemsArr}
+	/>
+	, document.getElementById('container')
 );
-

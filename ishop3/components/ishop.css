@@ -12,8 +12,15 @@
 table, th, td {
   border: 1px solid;
 }
-.reset{
+.reset,.edit{
 	padding: 10px;
-	margin-left: 10px;
+	margin: 10px;
 	font-size: 20px;
+	display: block;
+}
+.newProduct{
+padding: 10px 20px;
+font-size: 20px;
+display: block;
+margin-top: 10px;
 }
