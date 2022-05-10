@@ -1,0 +1,9 @@
+.textTitle{
+	font-style: italic;
+	font-size: 3em;
+	font-weight: bold;
+}
+.countCard,.textCard{
+	font-style: italic;
+	font-size: 2em;
+}
