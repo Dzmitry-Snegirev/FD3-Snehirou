@@ -12,12 +12,9 @@ class Shop extends React.Component {
 		items: PropTypes.array.isRequired,
 	};
 
-
-
 	state = {
 		selectedLineCode: null,
 		startPack: this.props.items,
-		startCardPack: this.props.items,
 	}
 	selected = (key) => {
 		this.setState({ selectedLineCode: key });
@@ -26,20 +23,11 @@ class Shop extends React.Component {
 		this.setState({
 			startPack: this.state.startPack.filter(m => m.code !== code)
 		});
-		/*
-			var copyStartPack = this.state.startPack.slice();
-			copyStartPack.splice(code, 1);
-			this.setState({ startPack: copyStartPack });
-	*/
-	}
-	card = (code) => {
-		this.setState({
-			startCardPack: this.state.startCardPack.filter(n => n.code === code)
-		});
-	}
 
+	}
 	render() {
 		var catalogNamesCodes = [];
+		var selectedItem = this.props.items.filter(item => item.code === this.state.selectedLineCode)[0]
 		this.props.names.forEach(v => catalogNamesCodes.push(<th key={v.code} className={'itemName'}>{v.name}</th>));
 		return (
 			<div>
@@ -61,14 +49,10 @@ class Shop extends React.Component {
 				{
 					this.state.selectedLineCode
 					&&
-					this.state.startCardPack.map(p =>
 					(<ItemCard
-						key={p.code}
-						code={p.code} text={p.text} count={p.count}
-						price={p.price} />
+						data={selectedItem}
+					/>
 					)
-					)
-
 				}
 			</div>
 		)
@@ -81,18 +65,3 @@ export default Shop;
 
 
 
-/*
-render() {
-	var catalogNamesCodes = [];
-	this.props.names.forEach(v => catalogNamesCodes.push(React.DOM.th({ key: v.code, className: 'itemName', }, v.name)));
-	return React.DOM.table({ className: 'tableShop' },
-		React.DOM.thead({ className: 'names' }, React.DOM.tr({ className: 'CatalogNames' }, catalogNamesCodes)),
-		this.state.startPack.map(n => {
-			return React.createElement(ProductLine, {
-				key: n.code,
-				code: n.code, text: n.text, count: n.count,
-				price: n.price, foto: n.foto, cbSelected: this.selected, startCode: this.state.selectedLineCode, cbdel: this.del,
-			})
-		})
-	);
-}*/

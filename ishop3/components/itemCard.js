@@ -14,9 +14,9 @@ class ItemCard extends React.Component {
 	render() {
 		return (
 			<div className={'card'}>
-				<div className={'textTitle'}>{this.props.text}</div>
-				<div className={'countCard'}>{this.props.count}</div>
-				<div className={'textCard'}>{this.props.price}</div>
+				<div className={'textTitle'}>{this.props.data.text}</div>
+				<div className={'countCard'}>{this.props.data.count}</div>
+				<div className={'textCard'}>{this.props.data.price}</div>
 			</div>
 		)
 	}
