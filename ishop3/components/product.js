@@ -15,7 +15,6 @@ class ProductLine extends React.Component {
 
 	selectLine = (eo) => {
 		this.props.cbSelected(this.props.code);
-		this.props.cbcard(this.props.code);
 	}
 
 	// selectcard = (eo) => {
