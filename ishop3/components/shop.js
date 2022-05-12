@@ -15,9 +15,17 @@ class Shop extends React.Component {
 	state = {
 		selectedLineCode: null,
 		startPack: this.props.items,
+		workMode: false,
+		diseable: false,
 	}
 	selected = (key) => {
 		this.setState({ selectedLineCode: key });
+	}
+	mode = () => {
+		this.setState({ workMode: true });
+	}
+	diseableButton = () => {
+		this.setState({ diseable: true });
 	}
 	del = (code) => {
 		this.setState({
@@ -41,7 +49,7 @@ class Shop extends React.Component {
 					(<ProductLine
 						key={n.code}
 						code={n.code} text={n.text} count={n.count}
-						price={n.price} foto={n.foto} cbSelected={this.selected} startCode={this.state.selectedLineCode} cbdel={this.del} cbcard={this.card} />
+						price={n.price} foto={n.foto} cbSelected={this.selected} startCode={this.state.selectedLineCode} cbdel={this.del} cbselectMode={this.mode} />
 					)
 					)}
 				</table>
@@ -50,7 +58,7 @@ class Shop extends React.Component {
 					this.state.selectedLineCode
 					&&
 					(<ItemCard
-						data={selectedItem}
+						data={selectedItem} startCardMode={this.state.workMode} cbdiseable={this.diseableButton}
 					/>
 					)
 				}

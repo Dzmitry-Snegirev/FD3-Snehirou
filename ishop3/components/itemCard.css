@@ -1,3 +1,4 @@
+
 .textTitle{
 	font-style: italic;
 	font-size: 3em;
@@ -6,4 +7,19 @@
 .countCard,.textCard{
 	font-style: italic;
 	font-size: 2em;
+}
+.edit{
+	background-color: #fff!important;
+}
+.formCard{
+	font-size: 2em;
+}
+.dataCards{
+	margin-left: 20px;
+	padding: 6px;
+}
+.formbutton{
+	padding: 10px;
+margin: 10px;
+font-size: 0.5em;
 }
