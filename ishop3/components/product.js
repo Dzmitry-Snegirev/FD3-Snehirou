@@ -17,10 +17,12 @@ class ProductLine extends React.Component {
 		this.props.cbSelected(this.props.code);
 	}
 
-	// selectcard = (eo) => {
-	// 	this.props.cbSelected(this.props.code);
-	// 	this.props.cbcard(this.props.code);
-	// }
+	selectMode = (eo) => {
+		//	this.props.cbSelected(this.props.code);
+		this.props.cbselectMode();
+	}
+
+
 
 	delLine = (eo) => {
 		const conf = confirm(`Вы уверены?`);
@@ -40,10 +42,10 @@ class ProductLine extends React.Component {
 					<img className={'FotoItem'} src={this.props.foto}></img>
 				</td>
 				<td className={'button'}>
-					<input className={'edit'} type={'button'} value={'Редактировать'} onClick={this.selectLine}
-						style={{ backgroundColor: (this.props.startCode === this.props.code) ? 'orange' : 'white' }}>
+					<input className={'edit'} type={'button'} value={'Редактировать'} onClick={this.selectMode}
+						style={{ backgroundColor: (this.props.startCode === this.props.code) ? 'orange' : 'white' }} disabled={this.props.selectedAnswerCode != this.props.code}>
 					</input>
-					<input className={'reset'} type={'button'} value={'Удалить'} onClick={this.delLine}></input>
+					<input className={'reset'} type={'button'} value={'Удалить'} onClick={this.delLine} disabled={this.props.selectedAnswerCode != this.props.code}></input>
 				</td>
 			</tr>
 
