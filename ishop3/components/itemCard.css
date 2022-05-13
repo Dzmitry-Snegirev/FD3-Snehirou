@@ -23,3 +23,7 @@
 margin: 10px;
 font-size: 0.5em;
 }
+.error{
+	margin-left: 1.5em;
+    color: red;
+}

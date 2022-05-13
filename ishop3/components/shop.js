@@ -16,7 +16,7 @@ class Shop extends React.Component {
 		selectedLineCode: null,
 		startPack: this.props.items,
 		workMode: false,
-		diseable: false,
+		dis: false,
 	}
 	selected = (key) => {
 		this.setState({ selectedLineCode: key });
@@ -25,7 +25,7 @@ class Shop extends React.Component {
 		this.setState({ workMode: true });
 	}
 	diseableButton = () => {
-		this.setState({ diseable: true });
+		this.setState({ dis: true });
 	}
 	del = (code) => {
 		this.setState({
@@ -49,11 +49,11 @@ class Shop extends React.Component {
 					(<ProductLine
 						key={n.code}
 						code={n.code} text={n.text} count={n.count}
-						price={n.price} foto={n.foto} cbSelected={this.selected} startCode={this.state.selectedLineCode} cbdel={this.del} cbselectMode={this.mode} />
+						price={n.price} foto={n.foto} cbSelected={this.selected} startCode={this.state.selectedLineCode} cbdel={this.del} cbselectMode={this.mode} disableMod={this.state.dis} />
 					)
 					)}
 				</table>
-				<input className={'newProduct'} type={'button'} value={'Новый'} ></input>
+				<input className={'newProduct'} type={'button'} value={'Новый'} disabled={this.state.dis} ></input>
 				{
 					this.state.selectedLineCode
 					&&
