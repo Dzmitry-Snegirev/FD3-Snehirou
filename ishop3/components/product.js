@@ -43,9 +43,9 @@ class ProductLine extends React.Component {
 				</td>
 				<td className={'button'}>
 					<input className={'edit'} type={'button'} value={'Редактировать'} onClick={this.selectMode}
-						style={{ backgroundColor: (this.props.startCode === this.props.code) ? 'orange' : 'white' }} disabled={this.props.selectedAnswerCode != this.props.code}>
+						style={{ backgroundColor: (this.props.startCode === this.props.code) ? 'orange' : 'white' }} disabled={this.props.disableMod}>
 					</input>
-					<input className={'reset'} type={'button'} value={'Удалить'} onClick={this.delLine} disabled={this.props.selectedAnswerCode != this.props.code}></input>
+					<input className={'reset'} type={'button'} value={'Удалить'} onClick={this.delLine} disabled={this.props.disableMod}></input>
 				</td>
 			</tr>
 
