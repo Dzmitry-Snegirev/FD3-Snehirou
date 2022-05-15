@@ -31,8 +31,15 @@ class Shop extends React.Component {
 		this.setState({
 			startPack: this.state.startPack.filter(m => m.code !== code)
 		});
-
 	}
+	changeItem = (newItem) => {
+		const newItems = this.state.startPack.map(item => item.code === newItem.code ? newItem : item)
+		this.setState({
+			startPack: newItems
+		});
+	}
+
+
 	render() {
 		var catalogNamesCodes = [];
 		var selectedItem = this.props.items.filter(item => item.code === this.state.selectedLineCode)[0]
@@ -58,7 +65,7 @@ class Shop extends React.Component {
 					this.state.selectedLineCode
 					&&
 					(<ItemCard
-						data={selectedItem} startCardMode={this.state.workMode} cbdiseable={this.diseableButton}
+						data={selectedItem} startCardMode={this.state.workMode} cbdiseable={this.diseableButton} cbSaveItem={this.changeItem} key={this.state.selectedLineCode}
 					/>
 					)
 				}

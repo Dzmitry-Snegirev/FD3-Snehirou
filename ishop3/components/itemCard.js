@@ -16,6 +16,7 @@ class ItemCard extends React.Component {
 		errorPrice: false,
 		errorUrl: false,
 		errorQuanity: false,
+
 		nameStr: this.props.data.text,
 		priceStr: this.props.data.count,
 		urlStr: this.props.data.foto,
@@ -28,6 +29,7 @@ class ItemCard extends React.Component {
 	editName = (EO) => {
 		this.props.cbdiseable();
 		this.setState({ nameStr: EO.target.value });
+
 	}
 	editPrice = (EO) => {
 		this.props.cbdiseable();
@@ -45,19 +47,36 @@ class ItemCard extends React.Component {
 	validName = (EO) => {
 		if (EO.target.value === "" || EO.target.value.lenght < 5)
 			this.setState({ errorName: true });
+		else {
+			this.setState({ errorName: false });
+		}
 	}
 	validPrice = (EO) => {
-		if (EO.target.value === "" || EO.target.value.lenght < 5)
+		if (EO.target.value === "" || isNaN(EO.target.value))
 			this.setState({ errorPrice: true });
+		else {
+			this.setState({ errorPrice: false });
+		}
 	}
 	validURL = (EO) => {
-		if (EO.target.value === "" || EO.target.value.lenght < 5)
+		if (EO.target.value === "" || EO.target.value.indexOf('@') == -1)
 			this.setState({ errorUrl: true });
+		else {
+			this.setState({ errorUrl: false });
+		}
 	}
 	validQuanity = (EO) => {
-		if (EO.target.value === "" || EO.target.value.lenght < 5)
+		if (EO.target.value === "" || isNaN(EO.target.value))
 			this.setState({ errorQuanity: true });
+		else {
+			this.setState({ errorQuanity: false });
+		}
 	}
+
+	saveItem = () => {
+		this.props.cbSaveItem({ ...this.props.data, text: this.state.nameStr, count: this.state.priceStr, foto: this.state.urlStr, price: this.state.quanityStr })
+	}
+
 
 	render() {
 		if (this.props.startCardMode === false) {
@@ -82,7 +101,8 @@ class ItemCard extends React.Component {
 							style={{ display: (this.state.errorUrl) ? 'inline' : 'none' }}>заполните поле,введите url</span><br />
 						Quanity<input type='text' className={'dataCards'} onChange={this.editQuanity} onBlur={this.validQuanity} value={this.state.quanityStr} /><span className={'error'}
 							style={{ display: (this.state.errorQuanity) ? 'inline' : 'none' }}>заполните поле,введите число</span><br />
-						<input type='button' className={'formbutton'} value='сохранить' onChange={this.editField} /><input type='button' className={'formbutton'} value='отмена' onClick={this.cancel} />
+						<input type='button' className={'formbutton'} value='сохранить' onClick={this.saveItem}
+							disabled={this.state.errorName || this.state.errorPrice || this.state.errorUrl || this.state.errorQuanity} /><input type='button' className={'formbutton'} value='отмена' onClick={this.cancel} />
 					</label>
 				</form>
 			);
