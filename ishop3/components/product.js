@@ -19,7 +19,7 @@ class ProductLine extends React.Component {
 
 	selectMode = (eo) => {
 		//	this.props.cbSelected(this.props.code);
-		this.props.cbselectMode(eo);
+		this.props.cbselectMode();
 	}
 
 

@@ -20,10 +20,8 @@ class Shop extends React.Component {
 	}
 	selected = (key) => {
 		this.setState({ selectedLineCode: key });
-		this.setState({ workMode: false });
 	}
-	mode = (eo) => {
-		eo.stopPropagation();
+	mode = () => {
 		this.setState({ workMode: true });
 	}
 	diseableButton = () => {
