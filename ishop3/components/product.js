@@ -19,7 +19,7 @@ class ProductLine extends React.Component {
 
 	selectMode = (eo) => {
 		//	this.props.cbSelected(this.props.code);
-		this.props.cbselectMode();
+		this.props.cbselectMode(eo);
 	}
 
 
@@ -34,7 +34,7 @@ class ProductLine extends React.Component {
 
 	render() {
 		return (<tbody className={'items'}>
-			<tr className={'info'} onClick={this.selectLine} style={{ backgroundColor: (this.props.startCode === this.props.code) ? 'orange' : 'white' }}>
+			<tr className={'info'} onClick={this.selectLine} style={{ backgroundColor: (this.props.startCode === this.props.code) ? 'orange' : 'white' }} >
 				<td className={'Text'}>{this.props.text}</td>
 				<td className={'Count'}>{this.props.count}</td>
 				<td className={'Text'}>{this.props.price}</td>
