@@ -73,8 +73,15 @@ class ItemCard extends React.Component {
 		}
 	}
 
+
 	saveItem = () => {
 		this.props.cbSaveItem({ ...this.props.data, text: this.state.nameStr, count: this.state.priceStr, foto: this.state.urlStr, price: this.state.quanityStr })
+		this.props.cbdiseableStart();
+		this.props.cbselectModeStart();
+	}
+	cancel = () => {
+		this.props.cbdiseableStart();
+		this.props.cbselectModeStart();
 	}
 
 

@@ -5,21 +5,25 @@ import './product.css';
 
 class ProductLine extends React.Component {
 
-	static propTypes = {
-		text: PropTypes.string.isRequired,
-		count: PropTypes.number.isRequired,
-		price: PropTypes.number.isRequired,
-		code: PropTypes.number.isRequired,
-	};
+	// static propTypes = {
+	// 	text: PropTypes.string.isRequired,
+	// 	count: PropTypes.number.isRequired,
+	// 	price: PropTypes.number.isRequired,
+	// 	code: PropTypes.number.isRequired,
+	// };
 
 
-	selectLine = (eo) => {
+	selectLine = () => {
 		this.props.cbSelected(this.props.code);
+		this.props.cbselectModeStart();
+		this.props.cbdiseableStart();
 	}
 
 	selectMode = (eo) => {
-		//	this.props.cbSelected(this.props.code);
+		eo.stopPropagation();
+		this.props.cbSelected(this.props.code);
 		this.props.cbselectMode();
+		this.props.cbdiseable();
 	}
 
 

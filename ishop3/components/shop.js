@@ -24,8 +24,14 @@ class Shop extends React.Component {
 	mode = () => {
 		this.setState({ workMode: true });
 	}
+	modeStart = () => {
+		this.setState({ workMode: false });
+	}
 	diseableButton = () => {
 		this.setState({ dis: true });
+	}
+	diseableStartButton = () => {
+		this.setState({ dis: false });
 	}
 	del = (code) => {
 		this.setState({
@@ -56,7 +62,8 @@ class Shop extends React.Component {
 					(<ProductLine
 						key={n.code}
 						code={n.code} text={n.text} count={n.count}
-						price={n.price} foto={n.foto} cbSelected={this.selected} startCode={this.state.selectedLineCode} cbdel={this.del} cbselectMode={this.mode} disableMod={this.state.dis} />
+						price={n.price} foto={n.foto} cbSelected={this.selected} startCode={this.state.selectedLineCode} cbdiseableStart={this.diseableStartButton} cbdiseable={this.diseableButton} cbselectModeStart={this.modeStart} cbdel={this.del} cbselectMode={this.mode}
+						disableMod={this.state.dis} />
 					)
 					)}
 				</table>
@@ -65,7 +72,8 @@ class Shop extends React.Component {
 					this.state.selectedLineCode
 					&&
 					(<ItemCard
-						data={selectedItem} startCardMode={this.state.workMode} cbdiseable={this.diseableButton} cbSaveItem={this.changeItem} key={this.state.selectedLineCode}
+						data={selectedItem} startCardMode={this.state.workMode} cbdiseable={this.diseableButton} cbdiseableStart={this.diseableStartButton}
+						cbSaveItem={this.changeItem} key={this.state.selectedLineCode} cbselectModeStart={this.modeStart}
 					/>
 					)
 				}
