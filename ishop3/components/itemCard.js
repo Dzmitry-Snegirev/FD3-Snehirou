@@ -59,7 +59,7 @@ class ItemCard extends React.Component {
 		}
 	}
 	validURL = (EO) => {
-		if (EO.target.value === "" || EO.target.value.indexOf('@') == -1)
+		if (EO.target.value === "" || EO.target.value.lenght < 5)
 			this.setState({ errorUrl: true });
 		else {
 			this.setState({ errorUrl: false });
@@ -78,6 +78,7 @@ class ItemCard extends React.Component {
 		this.props.cbSaveItem({ ...this.props.data, text: this.state.nameStr, count: this.state.priceStr, foto: this.state.urlStr, price: this.state.quanityStr })
 		this.props.cbdiseableStart();
 		this.props.cbselectModeStart();
+
 	}
 	cancel = () => {
 		this.props.cbdiseableStart();
@@ -86,13 +87,32 @@ class ItemCard extends React.Component {
 
 
 	render() {
-		if (this.props.startCardMode === false) {
+		if (this.props.startCardMode === 1) {
 			return (
 				<div className={'card'}>
 					<div className={'textTitle'}>{this.props.data.text}</div>
 					<div className={'countCard'}>{this.props.data.count}</div>
 					<div className={'textCard'}>{this.props.data.price}</div>
 				</div>
+			)
+		}
+		if (this.props.startCardMode === 2) {
+			return (
+				<form name='INFO' method="POST" action='http://fe.it-academy.by/TestForm.php' >
+					<label className={'formCard'}><br />
+						<div className={'newProduct'}>Add new product</div>
+						Name<input type='text' className={'dataCards'} onChange={this.editName} onBlur={this.validName} value={this.state.nameStr} /><span className={'error'}
+							style={{ display: (this.state.errorName) ? 'inline' : 'none' }}>заполните поле,введите текст</span><br />
+						Price<input type='text' className={'dataCards'} onChange={this.editPrice} onBlur={this.validPrice} value={this.state.priceStr} /><span className={'error'}
+							style={{ display: (this.state.errorPrice) ? 'inline' : 'none' }}>заполните поле,введите число</span><br />
+						Url<input type='text' className={'dataCards'} onChange={this.editUrl} onBlur={this.validURL} value={this.state.urlStr} /><span className={'error'}
+							style={{ display: (this.state.errorUrl) ? 'inline' : 'none' }}>заполните поле,введите url</span><br />
+						Quanity<input type='text' className={'dataCards'} onChange={this.editQuanity} onBlur={this.validQuanity} value={this.state.quanityStr} /><span className={'error'}
+							style={{ display: (this.state.errorQuanity) ? 'inline' : 'none' }}>заполните поле,введите число</span><br />
+						<input type='button' className={'formbutton'} value='сохранить' onClick={this.saveItem}
+							disabled={this.state.errorName || this.state.errorPrice || this.state.errorUrl || this.state.errorQuanity} /><input type='button' className={'formbutton'} value='отмена' onClick={this.cancel} />
+					</label>
+				</form>
 			)
 		}
 		else {
