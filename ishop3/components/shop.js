@@ -15,17 +15,21 @@ class Shop extends React.Component {
 	state = {
 		selectedLineCode: null,
 		startPack: this.props.items,
-		workMode: false,
+		selectedItem: this.props.items,
+		workMode: 1,
 		dis: false,
 	}
 	selected = (key) => {
 		this.setState({ selectedLineCode: key });
 	}
 	mode = () => {
-		this.setState({ workMode: true });
+		this.setState({ workMode: 3 });
+	}
+	modeNewProduct = () => {
+		this.setState({ workMode: 2 });
 	}
 	modeStart = () => {
-		this.setState({ workMode: false });
+		this.setState({ workMode: 1 });
 	}
 	diseableButton = () => {
 		this.setState({ dis: true });
@@ -48,7 +52,7 @@ class Shop extends React.Component {
 
 	render() {
 		var catalogNamesCodes = [];
-		var selectedItem = this.props.items.filter(item => item.code === this.state.selectedLineCode)[0]
+		var selectedItem = this.state.startPack.filter(item => item.code === this.state.selectedLineCode)[0]
 		this.props.names.forEach(v => catalogNamesCodes.push(<th key={v.code} className={'itemName'}>{v.name}</th>));
 		return (
 			<div>
@@ -67,7 +71,7 @@ class Shop extends React.Component {
 					)
 					)}
 				</table>
-				<input className={'newProduct'} type={'button'} value={'Новый'} disabled={this.state.dis} ></input>
+				<input className={'newProduct'} type={'button'} value={'Новый'} disabled={this.state.dis} modeNewProduct={this.modeNewProduct} ></input>
 				{
 					this.state.selectedLineCode
 					&&
