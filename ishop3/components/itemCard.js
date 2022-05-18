@@ -16,11 +16,11 @@ class ItemCard extends React.Component {
 		errorPrice: false,
 		errorUrl: false,
 		errorQuanity: false,
-
-		nameStr: this.props.data.text,
-		priceStr: this.props.data.count,
-		urlStr: this.props.data.foto,
-		quanityStr: this.props.data.price,
+		idStr: this.props.data ? this.props.data.code : this.props.idItems + 1,
+		nameStr: this.props.data ? this.props.data.text : "",
+		priceStr: this.props.data ? this.props.data.count : "",
+		urlStr: this.props.data ? this.props.data.foto : "",
+		quanityStr: this.props.data ? this.props.data.price : "",
 	}
 
 	editField = () => {
@@ -87,20 +87,22 @@ class ItemCard extends React.Component {
 
 
 	render() {
+
 		if (this.props.startCardMode === 1) {
 			return (
 				<div className={'card'}>
-					<div className={'textTitle'}>{this.props.data.text}</div>
-					<div className={'countCard'}>{this.props.data.count}</div>
-					<div className={'textCard'}>{this.props.data.price}</div>
+					<div className={'textTitle'}>{this.props.data ? this.props.data.text : ""}</div>
+					<div className={'countCard'}>{this.props.data ? this.props.data.count : ""}</div>
+					<div className={'textCard'}>{this.props.data ? this.props.data.price : ""}</div>
 				</div>
 			)
 		}
-		if (this.props.startCardMode === 2) {
+
+		if (this.props.startCardMode === "card" || "addproduct") {
 			return (
 				<form name='INFO' method="POST" action='http://fe.it-academy.by/TestForm.php' >
 					<label className={'formCard'}><br />
-						<div className={'newProduct'}>Add new product</div>
+						<div className={'dataCards'}>ID:{this.state.idStr}</div>
 						Name<input type='text' className={'dataCards'} onChange={this.editName} onBlur={this.validName} value={this.state.nameStr} /><span className={'error'}
 							style={{ display: (this.state.errorName) ? 'inline' : 'none' }}>заполните поле,введите текст</span><br />
 						Price<input type='text' className={'dataCards'} onChange={this.editPrice} onBlur={this.validPrice} value={this.state.priceStr} /><span className={'error'}
@@ -109,26 +111,7 @@ class ItemCard extends React.Component {
 							style={{ display: (this.state.errorUrl) ? 'inline' : 'none' }}>заполните поле,введите url</span><br />
 						Quanity<input type='text' className={'dataCards'} onChange={this.editQuanity} onBlur={this.validQuanity} value={this.state.quanityStr} /><span className={'error'}
 							style={{ display: (this.state.errorQuanity) ? 'inline' : 'none' }}>заполните поле,введите число</span><br />
-						<input type='button' className={'formbutton'} value='сохранить' onClick={this.saveItem}
-							disabled={this.state.errorName || this.state.errorPrice || this.state.errorUrl || this.state.errorQuanity} /><input type='button' className={'formbutton'} value='отмена' onClick={this.cancel} />
-					</label>
-				</form>
-			)
-		}
-		else {
-			return (
-				<form name='INFO' method="POST" action='http://fe.it-academy.by/TestForm.php' >
-					<label className={'formCard'}><br />
-						<div className={'dataCards'}>ID:{this.props.data.code}</div>
-						Name<input type='text' className={'dataCards'} onChange={this.editName} onBlur={this.validName} value={this.state.nameStr} /><span className={'error'}
-							style={{ display: (this.state.errorName) ? 'inline' : 'none' }}>заполните поле,введите текст</span><br />
-						Price<input type='text' className={'dataCards'} onChange={this.editPrice} onBlur={this.validPrice} value={this.state.priceStr} /><span className={'error'}
-							style={{ display: (this.state.errorPrice) ? 'inline' : 'none' }}>заполните поле,введите число</span><br />
-						Url<input type='text' className={'dataCards'} onChange={this.editUrl} onBlur={this.validURL} value={this.state.urlStr} /><span className={'error'}
-							style={{ display: (this.state.errorUrl) ? 'inline' : 'none' }}>заполните поле,введите url</span><br />
-						Quanity<input type='text' className={'dataCards'} onChange={this.editQuanity} onBlur={this.validQuanity} value={this.state.quanityStr} /><span className={'error'}
-							style={{ display: (this.state.errorQuanity) ? 'inline' : 'none' }}>заполните поле,введите число</span><br />
-						<input type='button' className={'formbutton'} value='сохранить' onClick={this.saveItem}
+						<input type='button' className={'formbutton'} value={this.props.startCardMode === 'addproduct' ? 'Добавить' : 'Сохранить'} onClick={this.saveItem}
 							disabled={this.state.errorName || this.state.errorPrice || this.state.errorUrl || this.state.errorQuanity} /><input type='button' className={'formbutton'} value='отмена' onClick={this.cancel} />
 					</label>
 				</form>

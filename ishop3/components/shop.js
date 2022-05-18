@@ -18,15 +18,18 @@ class Shop extends React.Component {
 		selectedItem: this.props.items,
 		workMode: 1,
 		dis: false,
+		id: this.props.items.length,
 	}
 	selected = (key) => {
 		this.setState({ selectedLineCode: key });
 	}
 	mode = () => {
-		this.setState({ workMode: 3 });
+		this.setState({ workMode: "card" });
 	}
 	modeNewProduct = () => {
-		this.setState({ workMode: 2 });
+
+		this.setState({ workMode: "addproduct" });
+		this.setState({ selectedLineCode: null });
 	}
 	modeStart = () => {
 		this.setState({ workMode: 1 });
@@ -38,9 +41,11 @@ class Shop extends React.Component {
 		this.setState({ dis: false });
 	}
 	del = (code) => {
+		console.log(this.state.startPack);
 		this.setState({
 			startPack: this.state.startPack.filter(m => m.code !== code)
 		});
+
 	}
 	changeItem = (newItem) => {
 		const newItems = this.state.startPack.map(item => item.code === newItem.code ? newItem : item)
@@ -71,13 +76,13 @@ class Shop extends React.Component {
 					)
 					)}
 				</table>
-				<input className={'newProduct'} type={'button'} value={'Новый'} disabled={this.state.dis} modeNewProduct={this.modeNewProduct} ></input>
+				<input className={'newProduct'} type={'button'} value={'Новый'} disabled={this.state.dis} onClick={this.modeNewProduct}  ></input>
 				{
-					this.state.selectedLineCode
+					(this.state.selectedLineCode || this.state.workMode)
 					&&
 					(<ItemCard
 						data={selectedItem} startCardMode={this.state.workMode} cbdiseable={this.diseableButton} cbdiseableStart={this.diseableStartButton}
-						cbSaveItem={this.changeItem} key={this.state.selectedLineCode} cbselectModeStart={this.modeStart}
+						cbSaveItem={this.changeItem} key={this.state.selectedLineCode} cbselectModeStart={this.modeStart} idItems={this.state.id}
 					/>
 					)
 				}
