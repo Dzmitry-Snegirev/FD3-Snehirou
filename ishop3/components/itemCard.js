@@ -7,10 +7,10 @@ class ItemCard extends React.Component {
 
 
 	state = {
-		errorName: false,
-		errorPrice: false,
-		errorUrl: false,
-		errorQuanity: false,
+		errorName: this.props.data === undefined ? true : false,
+		errorPrice: this.props.data === undefined ? true : false,
+		errorUrl: this.props.data === undefined ? true : false,
+		errorQuanity: this.props.data === undefined ? true : false,
 		idStr: this.props.data ? this.props.data.code : this.props.idItems + 1,
 		nameStr: this.props.data ? this.props.data.text : "",
 		priceStr: this.props.data ? this.props.data.count : "",
