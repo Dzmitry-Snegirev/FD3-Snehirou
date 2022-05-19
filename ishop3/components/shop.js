@@ -15,6 +15,7 @@ class Shop extends React.Component {
 	state = {
 		selectedLineCode: null,
 		startPack: this.props.items,
+		startPack: this.props.items,
 		selectedItem: this.props.items,
 		workMode: 1,
 		dis: false,
@@ -27,7 +28,6 @@ class Shop extends React.Component {
 		this.setState({ workMode: "card" });
 	}
 	modeNewProduct = () => {
-
 		this.setState({ workMode: "addproduct" });
 		this.setState({ selectedLineCode: null });
 	}
@@ -41,7 +41,6 @@ class Shop extends React.Component {
 		this.setState({ dis: false });
 	}
 	del = (code) => {
-		console.log(this.state.startPack);
 		this.setState({
 			startPack: this.state.startPack.filter(m => m.code !== code)
 		});
@@ -54,9 +53,22 @@ class Shop extends React.Component {
 		});
 	}
 
+	addItem = (newItem) => {
+		const newPack = [...this.state.startPack];
+		newPack.push(newItem);
+		this.setState({
+			startPack: newPack
+		});
+
+	}
+
+
+
+
 
 	render() {
 		var catalogNamesCodes = [];
+		console.log(this.state.startPack);
 		var selectedItem = this.state.startPack.filter(item => item.code === this.state.selectedLineCode)[0]
 		this.props.names.forEach(v => catalogNamesCodes.push(<th key={v.code} className={'itemName'}>{v.name}</th>));
 		return (
@@ -82,7 +94,7 @@ class Shop extends React.Component {
 					&&
 					(<ItemCard
 						data={selectedItem} startCardMode={this.state.workMode} cbdiseable={this.diseableButton} cbdiseableStart={this.diseableStartButton}
-						cbSaveItem={this.changeItem} key={this.state.selectedLineCode} cbselectModeStart={this.modeStart} idItems={this.state.id}
+						cbSaveItem={this.changeItem} cbAddItem={this.addItem} key={this.state.selectedLineCode} cbselectModeStart={this.modeStart} idItems={this.state.id}
 					/>
 					)
 				}
