@@ -68,7 +68,7 @@ class Shop extends React.Component {
 
 	render() {
 		var catalogNamesCodes = [];
-		console.log(this.state.startPack);
+		
 		var selectedItem = this.state.startPack.filter(item => item.code === this.state.selectedLineCode)[0]
 		this.props.names.forEach(v => catalogNamesCodes.push(<th key={v.code} className={'itemName'}>{v.name}</th>));
 		return (

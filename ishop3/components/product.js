@@ -5,12 +5,12 @@ import './product.css';
 
 class ProductLine extends React.Component {
 
-	// static propTypes = {
-	// 	text: PropTypes.string.isRequired,
-	// 	count: PropTypes.number.isRequired,
-	// 	price: PropTypes.number.isRequired,
-	// 	code: PropTypes.number.isRequired,
-	// };
+	static propTypes = {
+		text: PropTypes.string.isRequired,
+		count: PropTypes.number.isRequired,
+		price: PropTypes.number.isRequired,
+		code: PropTypes.number.isRequired,
+	};
 
 
 	selectLine = () => {
