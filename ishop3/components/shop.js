@@ -30,6 +30,7 @@ class Shop extends React.Component {
 	modeNewProduct = () => {
 		this.setState({ workMode: "addproduct" });
 		this.setState({ selectedLineCode: null });
+		this.setState({ dis: true });
 	}
 	modeStart = () => {
 		this.setState({ workMode: 1 });
@@ -68,7 +69,7 @@ class Shop extends React.Component {
 
 	render() {
 		var catalogNamesCodes = [];
-		
+
 		var selectedItem = this.state.startPack.filter(item => item.code === this.state.selectedLineCode)[0]
 		this.props.names.forEach(v => catalogNamesCodes.push(<th key={v.code} className={'itemName'}>{v.name}</th>));
 		return (
@@ -84,7 +85,7 @@ class Shop extends React.Component {
 						key={n.code}
 						code={n.code} text={n.text} count={n.count}
 						price={n.price} foto={n.foto} cbSelected={this.selected} startCode={this.state.selectedLineCode} cbdiseableStart={this.diseableStartButton} cbdiseable={this.diseableButton} cbselectModeStart={this.modeStart} cbdel={this.del} cbselectMode={this.mode}
-						disableMod={this.state.dis} />
+						disableMod={this.state.dis} workMode={this.state.workMode} />
 					)
 					)}
 				</table>
