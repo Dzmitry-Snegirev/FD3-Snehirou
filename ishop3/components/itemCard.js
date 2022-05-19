@@ -4,12 +4,7 @@ import './itemCard.css';
 
 class ItemCard extends React.Component {
 
-	// static propTypes = {
-	// 	text: PropTypes.string.isRequired,
-	// 	count: PropTypes.number.isRequired,
-	// 	price: PropTypes.number.isRequired,
-	// 	code: PropTypes.number.isRequired,
-	// };
+
 
 	state = {
 		errorName: false,
@@ -81,10 +76,10 @@ class ItemCard extends React.Component {
 	}
 
 	AddItem = () => {
-		const data = { text: this.state.nameStr, code: this.state.idStr, count: + this.state.priceStr, price: + this.state.quanityStr, foto: this.state.urlStr };
-		this.props.cbAddItem(data)
 		this.props.cbdiseableStart();
 		this.props.cbselectModeStart();
+		const data = { text: this.state.nameStr, code: this.state.idStr, count: + this.state.priceStr, price: + this.state.quanityStr, foto: this.state.urlStr };
+		this.props.cbAddItem(data)
 	}
 	cancel = () => {
 		this.props.cbdiseableStart();
@@ -119,7 +114,6 @@ class ItemCard extends React.Component {
 							style={{ display: (this.state.errorQuanity) ? 'inline' : 'none' }}>заполните поле,введите число</span><br />
 						<input type='button' className={'formbutton'} value={this.props.startCardMode === 'addproduct' ? 'Добавить' : 'Сохранить'}
 							onClick={this.props.startCardMode === 'card' ? this.saveItem : this.AddItem}
-							//	onClick={this.saveItem}
 							disabled={this.state.errorName || this.state.errorPrice || this.state.errorUrl || this.state.errorQuanity} /><input type='button' className={'formbutton'} value='отмена' onClick={this.cancel} />
 					</label>
 				</form>
