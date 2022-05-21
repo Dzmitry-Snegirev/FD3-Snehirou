@@ -79,7 +79,8 @@ class ItemCard extends React.Component {
 		this.props.cbdiseableStart();
 		this.props.cbselectModeStart();
 		const data = { text: this.state.nameStr, code: this.state.idStr, count: + this.state.priceStr, price: + this.state.quanityStr, foto: this.state.urlStr };
-		this.props.cbAddItem(data)
+		this.props.cbAddItem(data);
+		this.setState({ idStr: this.state.idStr + 1 });
 	}
 	cancel = () => {
 		this.props.cbdiseableStart();
@@ -99,7 +100,7 @@ class ItemCard extends React.Component {
 			)
 		}
 
-		if (this.props.startCardMode === "card" || "addproduct") {
+		if (this.props.startCardMode === "addproduct" || this.props.startCardMode === "card") {
 			return (
 				<form name='INFO' method="POST" action='http://fe.it-academy.by/TestForm.php' >
 					<label className={'formCard'}><br />

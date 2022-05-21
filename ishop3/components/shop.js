@@ -15,7 +15,6 @@ class Shop extends React.Component {
 	state = {
 		selectedLineCode: null,
 		startPack: this.props.items,
-		startPack: this.props.items,
 		selectedItem: this.props.items,
 		workMode: 1,
 		dis: false,
@@ -30,8 +29,9 @@ class Shop extends React.Component {
 	modeNewProduct = () => {
 		this.setState({ workMode: "addproduct" });
 		this.setState({ selectedLineCode: null });
-		this.setState({ dis: true });
+		//	this.setState({ dis: true });
 	}
+
 	modeStart = () => {
 		this.setState({ workMode: 1 });
 	}
