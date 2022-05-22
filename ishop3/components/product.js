@@ -9,7 +9,7 @@ class ProductLine extends React.Component {
 		text: PropTypes.string.isRequired,
 		count: PropTypes.number.isRequired,
 		price: PropTypes.number.isRequired,
-		code: PropTypes.number.isRequired,
+		foto: PropTypes.string.isRequired,
 	};
 
 

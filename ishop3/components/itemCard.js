@@ -11,7 +11,7 @@ class ItemCard extends React.Component {
 		errorPrice: this.props.data === undefined ? true : false,
 		errorUrl: this.props.data === undefined ? true : false,
 		errorQuanity: this.props.data === undefined ? true : false,
-		idStr: this.props.data ? this.props.data.code : this.props.idItems + 1,
+		idStr: this.props.data === undefined ? `${Math.floor(Math.random() * 100) + 1}` : `${Math.floor(Math.random() * 100) + 1}`,
 		nameStr: this.props.data ? this.props.data.text : "",
 		priceStr: this.props.data ? this.props.data.count : "",
 		urlStr: this.props.data ? this.props.data.foto : "",
