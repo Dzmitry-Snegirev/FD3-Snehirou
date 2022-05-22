@@ -2,20 +2,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import RainbowFrame from './components/RainbowFrame';
+let colorsArr = ['red', 'orange', 'yellow', 'green', '#00BFFF', 'blue', 'purple'];
 
-import VotesBlock from './components/VotesBlock';
 
-let questionText='Как вы относитесь к программированию?';
-let answersArr=require('./answers.json');
-let defaultFreeAnswerText="???";
 
 ReactDOM.render(
-  <VotesBlock 
-    question={questionText}
-    answers={answersArr}
-    deffreeanswertext={defaultFreeAnswerText}
-    startWorkMode={1}
-  />
-  , document.getElementById('container') 
+	<RainbowFrame colors={colorsArr}>Hello</RainbowFrame>
+	, document.getElementById('container')
 );
 
