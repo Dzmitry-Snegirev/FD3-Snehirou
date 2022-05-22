@@ -18,7 +18,7 @@ class Shop extends React.Component {
 		selectedItem: this.props.items,
 		workMode: 1,
 		dis: false,
-		id: this.props.items.length,
+
 	}
 	selected = (key) => {
 		this.setState({ selectedLineCode: key });
