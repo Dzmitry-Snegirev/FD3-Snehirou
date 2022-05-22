@@ -7,8 +7,8 @@ class ProductLine extends React.Component {
 
 	static propTypes = {
 		text: PropTypes.string.isRequired,
-		count: PropTypes.number.isRequired,
-		price: PropTypes.number.isRequired,
+		count: PropTypes.any.isRequired,
+		price: PropTypes.any.isRequired,
 		foto: PropTypes.string.isRequired,
 	};
 
