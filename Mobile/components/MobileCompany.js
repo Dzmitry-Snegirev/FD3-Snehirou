@@ -40,7 +40,7 @@ class MobileCompany extends React.PureComponent {
 	};
 
 	editData = (key, item) => {
-		debugger
+
 		let newClients = [...this.state.clients]; // копия самого массива клиентов
 		newClients.forEach((c, i) => {
 			if (c.id == key) {
