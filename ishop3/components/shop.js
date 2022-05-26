@@ -16,6 +16,7 @@ class Shop extends React.Component {
 		selectedLineCode: null,
 		startPack: this.props.items,
 		selectedItem: this.props.items,
+		selectedLineCode: null,
 		workMode: 1,
 		dis: false,
 
