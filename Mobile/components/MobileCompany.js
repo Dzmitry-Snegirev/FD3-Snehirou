@@ -32,29 +32,46 @@ class MobileCompany extends React.PureComponent {
 	componentDidMount = () => {
 		voteEvents.addListener('EditDataItem', this.editData);
 		voteEvents.addListener('Edititem', this.selected);
+		voteEvents.addListener('Cancel', this.cancel);
+		voteEvents.addListener('del', this.delItem);
 	};
 
 	componentWillUnmount = () => {
 		voteEvents.removeListener('Edititem', this.selected);
 		voteEvents.removeListener('EditDataItem', this.editData);
+		voteEvents.addListener('del', this.delItem);
 	};
 
-	editData = (key, item) => {
-
+	editData = (item) => {
 		let newClients = [...this.state.clients]; // копия самого массива клиентов
 		newClients.forEach((c, i) => {
-			if (c.id == key) {
+			if (c.id == item.id) {
 				let newClient = { ...c }; // копия хэша изменившегося клиента
 				newClient = item;
 				newClients[i] = newClient;
 			}
 		});
 		this.setState({ clients: newClients });
+		this.setState({ workMode: 1 });
+
 	}
 
 	selected = (key) => {
 		this.setState({ workMode: "editProduct" });
 		this.setState({ selectedLineCode: key });
+	}
+	cancel = () => {
+		this.setState({ workMode: 1 });
+	}
+	delItem = (code) => {
+		console.log(code);
+		let newClients = [...this.state.clients]; // копия самого массива клиентов
+		newClients.filter(
+			(m => m.id !== code)
+		);
+		this.setState({ clients: newClients });
+		// this.props.clients.filter(m => m.id !== code);
+		// console.log(this.props.clients);
 	}
 	modeNewProduct = () => {
 		this.setState({ workMode: "addproduct" });

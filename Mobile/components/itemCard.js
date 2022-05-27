@@ -38,9 +38,7 @@ class ItemCard extends React.PureComponent {
 		this.newTextRef5 = ref;
 	};
 
-	editData = (code) => {
-		voteEvents.emit('EditDataItem', code, { ...this.props.data, fio: this.state.fioStr, name: this.state.nameStr, surname: this.state.surnameStr, balance: this.state.balanceStr, statusActivity: this.state.statusStr });
-	}
+
 
 
 
@@ -58,31 +56,27 @@ class ItemCard extends React.PureComponent {
 
 
 	saveItem = () => {
-
 		if (this.newTextRef1) { // всегда проверяем - мало ли метод вызовется когда DOM-элемента уже нет или ещё нет?
-			let newFio = this.newTextRef1.value;
-			this.setState({ fioStr: newFio });
+			var newFio = this.newTextRef1.value;
 		}
 
 		if (this.newTextRef2) { // всегда проверяем - мало ли метод вызовется когда DOM-элемента уже нет или ещё нет?
-			let newName = this.newTextRef2.value;
-			this.setState({ nameStr: newName });
+			var newName = this.newTextRef2.value;
 		}
 		if (this.newTextRef3) { // всегда проверяем - мало ли метод вызовется когда DOM-элемента уже нет или ещё нет?
-			let newSurname = this.newTextRef3.value;
-			this.setState({ surnameStr: newSurname });
+			var newSurname = this.newTextRef3.value;
 		}
 		if (this.newTextRef4) { // всегда проверяем - мало ли метод вызовется когда DOM-элемента уже нет или ещё нет?
-			let newBalance = this.newTextRef4.value;
-			this.setState({ balanceStr: newBalance });
+			var newBalance = this.newTextRef4.value;
 		}
 		if (this.newTextRef5) { // всегда проверяем - мало ли метод вызовется когда DOM-элемента уже нет или ещё нет?
-			let newStatus = this.newTextRef5.checked;
-			this.setState({ statusStr: newStatus });
+			var newStatus = this.newTextRef5.checked;
 		}
-		this.editData(this.props.code);
+		this.setState({ statusStr: newStatus, balanceStr: newBalance, surnameStr: newSurname, nameStr: newName, fioStr: newFio }, this.editData);
 	}
-
+	editData = () => {
+		voteEvents.emit('EditDataItem', { ...this.props.data, fio: this.state.fioStr, name: this.state.nameStr, surname: this.state.surnameStr, balance: this.state.balanceStr, statusActivity: this.state.statusStr });
+	}
 	// AddItem = () => {
 	// 	this.props.cbdiseableStart();
 	// 	this.props.cbselectModeStart();
@@ -91,8 +85,7 @@ class ItemCard extends React.PureComponent {
 	// 	this.setState({ idStr: this.state.idStr + 1 });
 	// }
 	cancel = () => {
-		this.props.cbdiseableStart();
-		this.props.cbselectModeStart();
+		voteEvents.emit('Cancel', "")
 	}
 
 
@@ -129,8 +122,6 @@ class ItemCard extends React.PureComponent {
 				</form>
 			);
 		}
-
-
 	};
 }
 export default ItemCard;
