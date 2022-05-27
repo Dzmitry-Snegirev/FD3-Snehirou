@@ -15,7 +15,7 @@ class MobileClient extends React.PureComponent {
 
 	state = {
 		info: this.props.info,
-		status: this.props.status,
+		//	statusStart: this.props.status,
 		//	selectedLineCode: null,
 	};
 
@@ -27,6 +27,10 @@ class MobileClient extends React.PureComponent {
 	edit = () => {
 		voteEvents.emit('Edititem', this.state.info.id);
 	}
+	del = () => {
+		voteEvents.emit('del', this.state.info.id);
+	}
+
 	render() {
 
 		console.log("MobileClient id=" + this.state.info.id + " render");
@@ -37,14 +41,14 @@ class MobileClient extends React.PureComponent {
 				<td className='item'>{this.state.info.name}</td>
 				<td className='item'>{this.state.info.surname}</td>
 				<td className='item'>{this.state.info.balance}</td>
-				<td className='status' style={{ backgroundColor: (this.state.status) ? 'green' : 'red' }}
+				<td className='status' style={{ backgroundColor: (this.props.info.statusActivity) ? 'green' : 'red' }}
 				>
-					{this.state.status ? 'active' : 'blocked'}</td>
+					{this.props.info.statusActivity ? 'active' : 'blocked'}</td>
 				<td>
 					<input type="button" value="Редактировать" onClick={this.edit}
 					/>
 				</td>
-				<td>	<input type="button" value="Удалить" onClick={this.state.setname}
+				<td>	<input type="button" value="Удалить" onClick={this.del}
 				/></td>
 			</tr>
 		);
