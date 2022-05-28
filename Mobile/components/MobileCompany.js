@@ -34,12 +34,14 @@ class MobileCompany extends React.PureComponent {
 		voteEvents.addListener('Edititem', this.selected);
 		voteEvents.addListener('Cancel', this.cancel);
 		voteEvents.addListener('del', this.delItem);
+		voteEvents.addListener('AddItem', this.addNewItem);
 	};
 
 	componentWillUnmount = () => {
 		voteEvents.removeListener('Edititem', this.selected);
 		voteEvents.removeListener('EditDataItem', this.editData);
 		voteEvents.addListener('del', this.delItem);
+		voteEvents.addListener('AddItem', this.addNewItem);
 	};
 
 	editData = (item) => {
@@ -53,26 +55,34 @@ class MobileCompany extends React.PureComponent {
 		});
 		this.setState({ clients: newClients });
 		this.setState({ workMode: 1 });
+	}
 
+	addNewItem = (item) => {
+		let newClients = [...this.state.clients, item]; // копия самого массива клиентов
+		this.setState({ clients: newClients });
+		this.setState({ workMode: 1 });
 	}
 
 	selected = (key) => {
 		this.setState({ workMode: "editProduct" });
 		this.setState({ selectedLineCode: key });
 	}
+
 	cancel = () => {
 		this.setState({ workMode: 1 });
 	}
+
 	delItem = (code) => {
-		console.log(code);
-		let newClients = [...this.state.clients]; // копия самого массива клиентов
-		newClients.filter(
-			(m => m.id !== code)
-		);
-		this.setState({ clients: newClients });
-		// this.props.clients.filter(m => m.id !== code);
-		// console.log(this.props.clients);
+		let arr = this.state.clients.slice();
+		// копия самого массива клиентов
+		arr.forEach((c, i) => {
+			if (c.id == code) {
+				arr.splice(i, 1)
+			}
+		});
+		this.setState({ clients: arr });
 	}
+
 	modeNewProduct = () => {
 		this.setState({ workMode: "addproduct" });
 		this.setState({ selectedLineCode: null });
@@ -86,12 +96,32 @@ class MobileCompany extends React.PureComponent {
 		this.setState({ name: 'Velcom' });
 	};
 
+	active = () => {
+		let newClients = [...this.state.clients];
+		this.setState({
+			clients: newClients.filter(m => m.statusActivity === true)
+		});
+	};
+
+	block = () => {
+		let newClients = [...this.state.clients];
+		this.setState({
+			clients: newClients.filter(m => m.statusActivity !== true)
+		});
+	};
+
+	allClients = () => {
+		this.setState({
+			clients: this.props.clients
+		});
+	};
+
 	render() {
 
 		console.log("MobileCompany render");
 		var catalogNamesCodes = [];
 
-		var selectedItem = this.props.clients.filter(item => item.id === this.state.selectedLineCode)[0]
+		var selectedItem = this.state.clients.filter(item => item.id === this.state.selectedLineCode)[0]
 		this.props.calogNames.forEach(v => catalogNamesCodes.push(<th key={v.code} className={'itemName'}>{v.name}</th>));
 		var clientsCode = this.state.clients.map(client =>
 			<MobileClient key={client.id} info={client} status={client.statusActivity} />
@@ -106,9 +136,9 @@ class MobileCompany extends React.PureComponent {
 				<br></br>
 				<br></br>
 				<br></br>
-				<input type="button" value="Все" onClick={this.setName1} />
-				<input type="button" value="Активные" onClick={this.setName2} />
-				<input type="button" value="Заблокированные" onClick={this.setName2} />
+				<input type="button" value="Все" onClick={this.allClients} />
+				<input type="button" value="Активные" onClick={this.active} />
+				<input type="button" value="Заблокированные" onClick={this.block} />
 				<br></br>
 				<br></br>
 				<br></br>
@@ -128,8 +158,9 @@ class MobileCompany extends React.PureComponent {
 					&&
 					(<ItemCard
 						data={selectedItem}
+						startClients={this.state.clients}
 						startCardMode={this.state.workMode}
-						code={this.state.selectedLineCode}
+						//	code={this.state.selectedLineCode}
 						key={this.state.selectedLineCode}
 					/>
 					)

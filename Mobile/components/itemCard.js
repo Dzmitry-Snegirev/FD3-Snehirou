@@ -6,7 +6,7 @@ import { voteEvents } from './events';
 class ItemCard extends React.PureComponent {
 
 	state = {
-		//idStr: this.props.data === undefined ? `${Math.floor(Math.random() * 100) + 1}` : this.props.code,
+		idStr: this.props.data === undefined && `${this.addNewKey}`,
 		fioStr: this.props.data ? this.props.data.fio : "",
 		nameStr: this.props.data ? this.props.data.name : "",
 		surnameStr: this.props.data ? this.props.data.surname : "",
@@ -39,51 +39,51 @@ class ItemCard extends React.PureComponent {
 	};
 
 
-
-
-
-
-
-
-	validQuanity = (EO) => {
-		if (EO.target.value === "" || isNaN(EO.target.value))
-			this.setState({ errorQuanity: true });
-		else {
-			this.setState({ errorQuanity: false });
+	addNewKey = () => {
+		let data = this.props.startClients;
+		let count = 100;
+		var max = 0
+		for (let i in data) {
+			if (data[i].id > data[max].id) {
+				max = i
+			}
 		}
+		count += max;
+		return count;
 	}
 
-
-
 	saveItem = () => {
+		let newFio, newName, newSurname, newBalance, newStatus;
 		if (this.newTextRef1) { // всегда проверяем - мало ли метод вызовется когда DOM-элемента уже нет или ещё нет?
-			var newFio = this.newTextRef1.value;
+			newFio = this.newTextRef1.value;
 		}
 
 		if (this.newTextRef2) { // всегда проверяем - мало ли метод вызовется когда DOM-элемента уже нет или ещё нет?
-			var newName = this.newTextRef2.value;
+			newName = this.newTextRef2.value;
 		}
 		if (this.newTextRef3) { // всегда проверяем - мало ли метод вызовется когда DOM-элемента уже нет или ещё нет?
-			var newSurname = this.newTextRef3.value;
+			newSurname = this.newTextRef3.value;
 		}
 		if (this.newTextRef4) { // всегда проверяем - мало ли метод вызовется когда DOM-элемента уже нет или ещё нет?
-			var newBalance = this.newTextRef4.value;
+			newBalance = this.newTextRef4.value;
 		}
 		if (this.newTextRef5) { // всегда проверяем - мало ли метод вызовется когда DOM-элемента уже нет или ещё нет?
-			var newStatus = this.newTextRef5.checked;
+			newStatus = this.newTextRef5.checked;
 		}
-		this.setState({ statusStr: newStatus, balanceStr: newBalance, surnameStr: newSurname, nameStr: newName, fioStr: newFio }, this.editData);
+		if (this.props.startCardMode === 'addproduct') {
+			this.setState({ statusStr: newStatus, balanceStr: newBalance, surnameStr: newSurname, nameStr: newName, fioStr: newFio }, this.AddItem);
+		}
+		if (this.props.startCardMode === 'editProduct') {
+			this.setState({ statusStr: newStatus, balanceStr: newBalance, surnameStr: newSurname, nameStr: newName, fioStr: newFio }, this.editData);
+		}
 	}
 	editData = () => {
 		voteEvents.emit('EditDataItem', { ...this.props.data, fio: this.state.fioStr, name: this.state.nameStr, surname: this.state.surnameStr, balance: this.state.balanceStr, statusActivity: this.state.statusStr });
 	}
-	// AddItem = () => {
-	// 	this.props.cbdiseableStart();
-	// 	this.props.cbselectModeStart();
-	// 	const data = { text: this.state.nameStr, code: this.state.idStr, count: + this.state.priceStr, price: + this.state.quanityStr, foto: this.state.urlStr };
-	// 	this.props.cbAddItem(data);
-	// 	this.setState({ idStr: this.state.idStr + 1 });
-	// }
+	AddItem = () => {
+		voteEvents.emit('AddItem', { ...this.props.data, fio: this.state.fioStr, name: this.state.nameStr, surname: this.state.surnameStr, balance: this.state.balanceStr, statusActivity: this.state.statusStr, key: this.addNewKey(this.state.idStr), id: this.addNewKey(this.state.idStr) });
+	}
+
 	cancel = () => {
 		voteEvents.emit('Cancel', "")
 	}
@@ -116,8 +116,8 @@ class ItemCard extends React.PureComponent {
 						Status<input type="checkbox" className={'dataCards'} defaultChecked={this.state.statusStr} ref={this.setNewTextRef5} />
 						<br></br>
 						<input type='button' className={'formbutton'} value={this.props.startCardMode === 'addproduct' ? 'Добавить' : 'Сохранить'}
-							onClick={this.props.startCardMode === 'addproduct' ? this.AddItem : this.saveItem}
-							disabled={this.state.errorName || this.state.errorPrice || this.state.errorUrl || this.state.errorQuanity} /><input type='button' className={'formbutton'} value='отмена' onClick={this.cancel} />
+							onClick={this.saveItem} />
+						<input type='button' className={'formbutton'} value='отмена' onClick={this.cancel} />
 					</label>
 				</form>
 			);
