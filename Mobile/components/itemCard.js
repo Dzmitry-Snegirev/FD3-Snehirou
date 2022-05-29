@@ -5,6 +5,19 @@ import { voteEvents } from './events';
 
 class ItemCard extends React.PureComponent {
 
+
+	static propTypes = {
+		data: PropTypes.shape({
+			id: PropTypes.number.isRequired,
+			fio: PropTypes.string.isRequired,
+			balance: PropTypes.any.isRequired,
+			name: PropTypes.string.isRequired,
+			surname: PropTypes.string.isRequired,
+			statusActivity: PropTypes.bool.isRequired,
+		}),
+		startCardMode: PropTypes.any.isRequired,
+	};
+
 	state = {
 		idStr: this.props.data === undefined && `${this.addNewKey}`,
 		fioStr: this.props.data ? this.props.data.fio : "",
@@ -40,16 +53,17 @@ class ItemCard extends React.PureComponent {
 
 
 	addNewKey = () => {
-		let data = this.props.startClients;
-		let count = 100;
-		var max = 0
-		for (let i in data) {
-			if (data[i].id > data[max].id) {
-				max = i
+
+		let max;
+		let min = this.props.startClients[0].id;
+		for (let i = 0; i < this.props.startClients.length; i++) {
+			if ((this.props.startClients[i].id) < min) {
+				min = this.props.startClients[i].id;
+			} else {
+				max = this.props.startClients[i].id;
 			}
 		}
-		count += max;
-		return count;
+		return max + 50;
 	}
 
 	saveItem = () => {

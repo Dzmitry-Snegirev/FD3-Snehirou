@@ -8,23 +8,30 @@ import ItemCard from './itemCard';
 
 class MobileCompany extends React.PureComponent {
 
-	// static propTypes = {
-	// 	name: PropTypes.string.isRequired,
-	// 	clients: PropTypes.arrayOf(
-	// 		PropTypes.shape({
-	// 			id: PropTypes.number.isRequired,
-	// 			fio: PropTypes.string.isRequired,
-	// 			balance: PropTypes.number.isRequired,
-	// 		})
-	// 	),
-	// };
+	static propTypes = {
+		name: PropTypes.string.isRequired,//список клиентов
+		clients: PropTypes.arrayOf(
+			PropTypes.shape({
+				id: PropTypes.number.isRequired,
+				fio: PropTypes.string.isRequired,
+				balance: PropTypes.any.isRequired,
+			})
+		),
+		calogNames: PropTypes.arrayOf(//данные для шапки таблицы
+			PropTypes.shape({
+				code: PropTypes.number.isRequired,
+				name: PropTypes.string.isRequired,
+			})
+		),
+	};
 
 	state = {
 		name: this.props.name,
 		clients: this.props.clients,
 		headerNames: this.props.calogNames,
 		selectedLineCode: null,
-		workMode: 1,
+		workMode: 1,//режим выбора редактирования или добавления  товара
+		filterMode: 1,//режим выбора редактирования или добавления  товара
 	};
 
 
@@ -40,8 +47,9 @@ class MobileCompany extends React.PureComponent {
 	componentWillUnmount = () => {
 		voteEvents.removeListener('Edititem', this.selected);
 		voteEvents.removeListener('EditDataItem', this.editData);
-		voteEvents.addListener('del', this.delItem);
-		voteEvents.addListener('AddItem', this.addNewItem);
+		voteEvents.removeListener('del', this.delItem);
+		voteEvents.removeListener('AddItem', this.addNewItem);
+		voteEvents.removeListener('Cancel', this.cancel);
 	};
 
 	editData = (item) => {
@@ -97,34 +105,53 @@ class MobileCompany extends React.PureComponent {
 	};
 
 	active = () => {
-		let newClients = [...this.state.clients];
-		this.setState({
-			clients: newClients.filter(m => m.statusActivity === true)
-		});
+		this.setState({ filterMode: 3 });//режим:активные клиенты
 	};
 
 	block = () => {
-		let newClients = [...this.state.clients];
-		this.setState({
-			clients: newClients.filter(m => m.statusActivity !== true)
-		});
+		this.setState({ filterMode: 2 });//режим: заблокированые клиенты
 	};
 
 	allClients = () => {
-		this.setState({
-			clients: this.props.clients
-		});
+		this.setState({ filterMode: 1 });//режим: все клиенты
 	};
+
+	sort = () => {
+		let hash1, hash2, hash3;
+		if (this.state.filterMode === 1) {
+			hash1 = this.state.clients.slice();
+			return hash1
+		}
+		if (this.state.filterMode === 2) {
+			hash2 = this.state.clients.slice();
+			for (let i in hash2) {
+				if (hash2[i].statusActivity == true) {
+					delete hash2[i];
+				}
+			}
+			return hash2
+		}
+		if (this.state.filterMode === 3) {
+			hash3 = this.state.clients.slice();
+			for (let i in hash3) {
+				if (hash3[i].statusActivity == false) {
+					delete hash3[i];
+				}
+			}
+			return hash3
+		}
+	}
 
 	render() {
 
 		console.log("MobileCompany render");
 		var catalogNamesCodes = [];
-
 		var selectedItem = this.state.clients.filter(item => item.id === this.state.selectedLineCode)[0]
+
 		this.props.calogNames.forEach(v => catalogNamesCodes.push(<th key={v.code} className={'itemName'}>{v.name}</th>));
-		var clientsCode = this.state.clients.map(client =>
-			<MobileClient key={client.id} info={client} status={client.statusActivity} />
+
+		var clientsCode = this.sort().map(client =>
+			<MobileClient key={client.id} info={client} modeClients={this.state.filterMode} />
 		);
 
 		return (
@@ -160,7 +187,6 @@ class MobileCompany extends React.PureComponent {
 						data={selectedItem}
 						startClients={this.state.clients}
 						startCardMode={this.state.workMode}
-						//	code={this.state.selectedLineCode}
 						key={this.state.selectedLineCode}
 					/>
 					)

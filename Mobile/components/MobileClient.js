@@ -5,13 +5,17 @@ import './MobileClient.css';
 import { voteEvents } from './events';
 class MobileClient extends React.PureComponent {
 
-	// static propTypes = {
-	//   info:PropTypes.shape({
-	//     id: PropTypes.number.isRequired,
-	//     fio: PropTypes.string.isRequired,
-	//     balance: PropTypes.number.isRequired,
-	//   }),
-	// };
+	static propTypes = {
+		info: PropTypes.shape({
+			id: PropTypes.number.isRequired,
+			fio: PropTypes.string.isRequired,
+			balance: PropTypes.any.isRequired,
+			name: PropTypes.string.isRequired,
+			surname: PropTypes.string.isRequired,
+			statusActivity: PropTypes.bool.isRequired,
+		}),
+		modeClients: PropTypes.number.isRequired,
+	};
 
 	state = {
 		info: this.props.info,
@@ -28,11 +32,8 @@ class MobileClient extends React.PureComponent {
 	del = () => {
 		voteEvents.emit('del', this.state.info.id);
 	}
-
 	render() {
-
 		console.log("MobileClient id=" + this.state.info.id + " render");
-
 		return (
 			<tr>
 				<td className='item'>{this.state.info.fio}</td>
@@ -50,8 +51,8 @@ class MobileClient extends React.PureComponent {
 				/></td>
 			</tr>
 		);
-
 	}
+
 
 }
 
