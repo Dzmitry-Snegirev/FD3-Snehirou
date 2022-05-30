@@ -119,15 +119,15 @@ class ItemCard extends React.PureComponent {
 			return (
 				<form name='INFO' method="POST" action='http://fe.it-academy.by/TestForm.php' >
 					<label className={'formCard'}><br />
-						Fio<input type='text' className={'dataCards'} defaultValue={this.state.fioStr} ref={this.setNewTextRef1} />
+						Fio<input type='text' className={'dataCards'} defaultValue={this.props.startCardMode === "editProduct" ? this.state.fioStr : ''} ref={this.setNewTextRef1} />
 						<br></br>
-						Name<input type='text' className={'dataCards'} defaultValue={this.state.nameStr} ref={this.setNewTextRef2} />
+						Name<input type='text' className={'dataCards'} defaultValue={this.props.startCardMode === "editProduct" ? this.state.nameStr : ''} ref={this.setNewTextRef2} />
 						<br></br>
-						Surname<input type='text' className={'dataCards'} defaultValue={this.state.surnameStr} ref={this.setNewTextRef3} />
+						Surname<input type='text' className={'dataCards'} defaultValue={this.props.startCardMode === "editProduct" ? this.state.surnameStr : ''} ref={this.setNewTextRef3} />
 						<br></br>
-						Balance<input type='text' className={'dataCards'} defaultValue={this.state.balanceStr} ref={this.setNewTextRef4} />
+						Balance<input type='text' className={'dataCards'} defaultValue={this.props.startCardMode === "editProduct" ? this.state.balanceStr : ''} ref={this.setNewTextRef4} />
 						<br></br>
-						Status<input type="checkbox" className={'dataCards'} defaultChecked={this.state.statusStr} ref={this.setNewTextRef5} />
+						Status<input type="checkbox" className={'dataCards'} defaultChecked={this.props.startCardMode === "editProduct" ? this.state.statusStr : ''} ref={this.setNewTextRef5} />
 						<br></br>
 						<input type='button' className={'formbutton'} value={this.props.startCardMode === 'addproduct' ? 'Добавить' : 'Сохранить'}
 							onClick={this.saveItem} />

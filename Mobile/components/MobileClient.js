@@ -16,9 +16,6 @@ class MobileClient extends React.PureComponent {
 		}),
 	};
 
-	state = {
-		info: this.props.info,
-	};
 
 	componentWillReceiveProps = () => {
 		console.log("MobileClient id=" + this.props.info.id + " componentWillReceiveProps");
@@ -26,19 +23,19 @@ class MobileClient extends React.PureComponent {
 	};
 
 	edit = () => {
-		voteEvents.emit('Edititem', this.state.info.id);
+		voteEvents.emit('Edititem', this.props.info.id);
 	}
 	del = () => {
-		voteEvents.emit('del', this.state.info.id);
+		voteEvents.emit('del', this.props.info.id);
 	}
 	render() {
-		console.log("MobileClient id=" + this.state.info.id + " render");
+		console.log("MobileClient id=" + this.props.info.id + " render");
 		return (
 			<tr>
-				<td className='item'>{this.state.info.fio}</td>
-				<td className='item'>{this.state.info.name}</td>
-				<td className='item'>{this.state.info.surname}</td>
-				<td className='item'>{this.state.info.balance}</td>
+				<td className='item'>{this.props.info.fio}</td>
+				<td className='item'>{this.props.info.name}</td>
+				<td className='item'>{this.props.info.surname}</td>
+				<td className='item'>{this.props.info.balance}</td>
 				<td className='status' style={{ backgroundColor: (this.props.info.statusActivity) ? 'green' : 'red' }}
 				>
 					{this.props.info.statusActivity ? 'active' : 'blocked'}</td>
