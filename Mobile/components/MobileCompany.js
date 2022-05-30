@@ -116,29 +116,15 @@ class MobileCompany extends React.PureComponent {
 		this.setState({ filterMode: 1 });//режим: все клиенты
 	};
 
-	sort = () => {
-		let hash1, hash2, hash3;
+	getFilterItems = () => {
 		if (this.state.filterMode === 1) {
-			hash1 = this.state.clients.slice();
-			return hash1
+			return this.state.clients
 		}
-		if (this.state.filterMode === 2) {
-			hash2 = this.state.clients.slice();
-			for (let i in hash2) {
-				if (hash2[i].statusActivity == true) {
-					delete hash2[i];
-				}
-			}
-			return hash2
+		else if (this.state.filterMode === 2) {
+			return this.state.clients.filter(m => m.statusActivity !== true)
 		}
-		if (this.state.filterMode === 3) {
-			hash3 = this.state.clients.slice();
-			for (let i in hash3) {
-				if (hash3[i].statusActivity == false) {
-					delete hash3[i];
-				}
-			}
-			return hash3
+		else if (this.state.filterMode === 3) {
+			return this.state.clients.filter(m => m.statusActivity === true)
 		}
 	}
 
@@ -150,8 +136,8 @@ class MobileCompany extends React.PureComponent {
 
 		this.props.calogNames.forEach(v => catalogNamesCodes.push(<th key={v.code} className={'itemName'}>{v.name}</th>));
 
-		var clientsCode = this.sort().map(client =>
-			<MobileClient key={client.id} info={client} modeClients={this.state.filterMode} />
+		var clientsCode = this.getFilterItems().map(client =>
+			<MobileClient key={client.id} info={client} />
 		);
 
 		return (

@@ -14,7 +14,6 @@ class MobileClient extends React.PureComponent {
 			surname: PropTypes.string.isRequired,
 			statusActivity: PropTypes.bool.isRequired,
 		}),
-		modeClients: PropTypes.number.isRequired,
 	};
 
 	state = {
@@ -23,7 +22,7 @@ class MobileClient extends React.PureComponent {
 
 	componentWillReceiveProps = (newProps) => {
 		console.log("MobileClient id=" + this.props.info.id + " componentWillReceiveProps");
-		this.setState({ info: newProps.info });
+		//	this.setState({ info: newProps.info });
 	};
 
 	edit = () => {
