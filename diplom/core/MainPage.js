@@ -1,11 +1,12 @@
 ﻿import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 import combinedReducer from '../redux/reducers.js';
-import CounterButton from '../components/CounterButton/CounterButton';
+import CountriesList from '../core/CountriesList';
 
-const store=createStore(combinedReducer);
+let store=createStore(combinedReducer, applyMiddleware(thunk));
 
 class MainPage extends React.PureComponent {
 
@@ -14,9 +15,8 @@ class MainPage extends React.PureComponent {
     return (
       <Provider store={store}>
           <div>
-              <h1>демо работы Redux</h1>
-              <CounterButton counterid={111} />
-              <CounterButton counterid={222} />
+              <h1>Страны</h1>
+              <CountriesList />
           </div>
       </Provider>
     );
