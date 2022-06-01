@@ -4,24 +4,24 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import combinedReducer from '../redux/reducers.js';
-import CountriesList from '../core/CountriesList';
+import BooksList from '../core/BooksList.js';
 
-let store=createStore(combinedReducer, applyMiddleware(thunk));
+let store = createStore(combinedReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk));
 
 class MainPage extends React.PureComponent {
 
-  render() {
+	render() {
 
-    return (
-      <Provider store={store}>
-          <div>
-              <h1>Страны</h1>
-              <CountriesList />
-          </div>
-      </Provider>
-    );
+		return (
+			<Provider store={store}>
+				<div>
+					<h1>Страны</h1>
+					<BooksList />
+				</div>
+			</Provider>
+		);
 
-  }
+	}
 
 }
 
