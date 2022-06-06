@@ -1,9 +1,12 @@
-﻿import { combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 
 import booksReducer from "./booksReducer";
+import cardReducer from "./cardReducer";
 
 let combinedReducer = combineReducers({
-	books: booksReducer, // редьюсер countriesReducer отвечает за раздел state под именем countries
+	books: booksReducer,
+	//	basket: cardReducer,
+	// редьюсер countriesReducer отвечает за раздел state под именем books
 	// + другие редьюсеры
 });
 

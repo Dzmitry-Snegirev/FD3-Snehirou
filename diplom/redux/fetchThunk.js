@@ -1,6 +1,6 @@
 import isoFetch from 'isomorphic-fetch';
+import { booksLoadingAC, booksErrorAC, booksSetAC, } from "./booksAC";
 
-import { booksLoadingAC, booksErrorAC, booksSetAC } from "./booksAC";
 
 function booksThunkAC(dispatch) {
 	// Как и любой action creator, countriesThunkAC должен вернуть action,
@@ -10,7 +10,13 @@ function booksThunkAC(dispatch) {
 	// ВЫПОЛНЯЕТ эту функцию и не пропускает её дальше, к редьюсерам.
 	return function () {
 		dispatch(booksLoadingAC());
-		isoFetch("http://fe.it-academy.by/Examples/net_city/countries.json")
+		isoFetch("http://localhost:3001/booksData",
+			{
+				method: 'GET',
+				headers: {
+					"Accept": "application/json",
+				},
+			})
 			.then((response) => { // response - HTTP-ответ
 				if (!response.ok) {
 					let Err = new Error("fetch error " + response.status);
@@ -21,13 +27,13 @@ function booksThunkAC(dispatch) {
 					return response.json();
 			})
 			.then((data) => {
-				dispatch(booksSetAC(data.rows));
+				dispatch(booksSetAC(data));
 			})
 			.catch((error) => {
 				console.error(error);
 				dispatch(booksErrorAC());
-			})
-			;
+			});
+
 	}
 
 }
