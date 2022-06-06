@@ -6,17 +6,11 @@ import { Menu } from 'semantic-ui-react'
 
 class FilterMenu extends React.PureComponent {
 
-	// componentDidMount() {
-	// 	if (!this.props.books.data) {
-	// 		this.props.dispatch(setFilterAC(this.props.dispatch));
-	// 	}
-	// }
 	state = { activeItem: 'all' }
 
 	handleItemClick = (e, { name }) => {
-		this.props.dispatch(setFilterAC(this.props.data, name));
+		this.props.dispatch(setFilterAC(this.props, name));
 		this.setState({ activeItem: name })
-		console.log(this.props);
 	};
 
 	render() {
