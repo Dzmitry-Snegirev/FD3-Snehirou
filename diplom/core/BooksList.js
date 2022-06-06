@@ -1,8 +1,14 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import { Container } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react'
 import { booksThunkAC } from "../redux/fetchThunk";
+
+import BookCard from './components/BookCard';
+import FilterMenu from './components/FilterMenu';
+import MenuTop from './components/MenuTop';
+
 
 class BooksList extends React.PureComponent {
 
@@ -11,23 +17,29 @@ class BooksList extends React.PureComponent {
 	};
 
 	componentDidMount() {
-		this.props.dispatch(booksThunkAC(this.props.dispatch));
+		if (!this.props.books.data) {
+			this.props.dispatch(booksThunkAC(this.props.dispatch));
+		}
 	}
 
 	render() {
-
 		if (this.props.books.status <= 1)
 			return "загрузка...";
 
 		if (this.props.books.status === 2)
 			return "ошибка загрузки данных";
 
+		let booksData = this.props.books.data && this.props.books.data.map((book) =>
+			<BookCard key={book.id} {...book} />
+		);
 		return (
-			<ul>
-				{
-					this.props.books.data.map((countryInfo, index) => <li key={index}>{countryInfo[1]}</li>)
-				}
-			</ul>
+			<Container className='booksshop'>
+				<MenuTop />
+				<FilterMenu setFilter={this.props.setFilter} />
+				<Card.Group itemsPerRow={4}>
+					{booksData}
+				</Card.Group>
+			</Container>
 		);
 
 	}
@@ -39,5 +51,6 @@ const mapStateToProps = function (state) {
 		books: state.books,
 	};
 };
+
 
 export default connect(mapStateToProps)(BooksList);
