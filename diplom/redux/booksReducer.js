@@ -37,22 +37,25 @@ function booksReducer(state = initState, action) {
 		case SET_FILTER: {
 			let newState = { ...state };
 
-			if (newState.filterBy == "price_high") {
+			if (action.name == "price_high") {
 				newState.data.sort((a, b) =>
-					a[newState.data.price] > b[newState.data.price] ? 1 : -1);
+					a.price > b.price ? -1 : 1);
 				return newState;
 			}
-			else if (newState.filterBy == "price_low") {
+			else if (action.name == "price_low") {
 				newState.data.sort((a, b) =>
-					a[newState.data.price] < b[newState.data.price] ? 1 : -1);
+					a.price < b.price ? -1 : 1);
 				return newState;
 			}
-			else if (newState.filterBy == "author") {
+			else if (action.name == "author") {
 				newState.data.sort((a, b) =>
-					a[newState.data.author] < b[newState.data.author] ? 1 : -1);
+					a.author < b.author ? 1 : -1);
 				return newState;
 			}
+			else if (action.name == "all") {
 
+				return state.data;
+			}
 		};
 		default:
 			return state;
