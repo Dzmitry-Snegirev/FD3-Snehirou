@@ -2,6 +2,7 @@
 const BOOKS_ERROR = 'BOOKS_ERROR';
 const BOOKS_SET = 'BOOKS_SET';
 const SET_FILTER = 'SET_FILTER';
+const SET_QERY = 'SET_QERY';
 
 const booksLoadingAC = function () {
 	return {
@@ -28,10 +29,18 @@ const setFilterAC = function (books, name) {
 		booksStart: books,
 	};
 }
+const setQeryAC = function (value) {
+	return {
+		type: SET_QERY,
+		value: value,
+		//booksStart: books,
+	};
+}
 
 export {
 	booksLoadingAC, BOOKS_LOADING,
 	booksErrorAC, BOOKS_ERROR,
 	booksSetAC, BOOKS_SET,
 	setFilterAC, SET_FILTER,
+	setQeryAC, SET_QERY,
 }

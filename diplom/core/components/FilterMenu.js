@@ -1,20 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setFilterAC } from '../../redux/booksAC';
-import { Menu } from 'semantic-ui-react'
+import { setQeryAC } from '../../redux/booksAC';
+import { Menu, Input } from 'semantic-ui-react'
 
 
 class FilterMenu extends React.PureComponent {
 
-	state = { activeItem: 'all' }
+	state = {
+		activeItem: 'all',
+		searchQuery: "",
+	}
 
 	handleItemClick = (e, { name }) => {
-		this.props.dispatch(setFilterAC(this.props, name));
+		this.props.dispatch(setFilterAC(this.props.data, name));
 		this.setState({ activeItem: name })
 	};
 
 	render() {
-		const { activeItem } = this.state
+		const { activeItem } = this.state;
 
 
 		return (
@@ -40,6 +44,9 @@ class FilterMenu extends React.PureComponent {
 					active={activeItem === 'author'}
 					onClick={this.handleItemClick}
 				>Автор</Menu.Item>
+				<Menu.Item>
+					<Input icon="search" placeholder="Введтите запрос" onChange={e => setQeryAC(e.target.value)}></Input>
+				</Menu.Item>
 			</Menu>
 		)
 	}

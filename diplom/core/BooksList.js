@@ -5,6 +5,7 @@ import { Container } from 'semantic-ui-react';
 import { Card } from 'semantic-ui-react'
 import { booksThunkAC } from "../redux/fetchThunk";
 
+
 import BookCard from './components/BookCard';
 import FilterMenu from './components/FilterMenu';
 import MenuTop from './components/MenuTop';
@@ -16,9 +17,35 @@ class BooksList extends React.PureComponent {
 		books: PropTypes.object.isRequired,
 	};
 
+
 	componentDidMount() {
 		if (!this.props.books.data) {
 			this.props.dispatch(booksThunkAC(this.props.dispatch));
+		}
+	}
+
+
+	getFilterItems = () => {
+		const newState = [...this.props.books.data];
+
+		if (this.props.books.filterBy == "price_high") {
+			newState.sort((a, b) =>
+				a.price > b.price ? -1 : 1);
+			return newState;
+		}
+		else if (this.props.books.filterBy == "price_low") {
+			newState.sort((a, b) =>
+				a.price < b.price ? -1 : 1);
+			return newState;
+		}
+		else if (this.props.books.filterBy == "author") {
+			newState.sort((a, b) =>
+				a.author > b.author ? 1 : -1);
+			return newState;
+		}
+		else {
+			return newState;
+
 		}
 	}
 
@@ -29,7 +56,7 @@ class BooksList extends React.PureComponent {
 		if (this.props.books.status === 2)
 			return "ошибка загрузки данных";
 
-		let booksData = this.props.books.data && this.props.books.data.map((book) =>
+		let booksData = this.props.books.data && this.getFilterItems().map(book =>
 			<BookCard key={book.id} {...book} />
 		);
 		return (
