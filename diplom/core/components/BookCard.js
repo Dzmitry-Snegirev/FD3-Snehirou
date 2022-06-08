@@ -18,6 +18,7 @@ class BookCard extends React.PureComponent {
 						{this.props.price}
 					</a>
 				</Card.Content>
+				<Button onClick={addItem}>Добавить в корзину</Button>
 			</Card>
 		);
 

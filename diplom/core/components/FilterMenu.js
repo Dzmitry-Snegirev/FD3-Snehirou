@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setFilterAC } from '../../redux/booksAC';
-import { setQeryAC } from '../../redux/booksAC';
+import { setFilterAC, setQeryAC } from '../../redux/booksAC';
 import { Menu, Input } from 'semantic-ui-react'
 
 
@@ -15,6 +14,12 @@ class FilterMenu extends React.PureComponent {
 	handleItemClick = (e, { name }) => {
 		this.props.dispatch(setFilterAC(this.props.data, name));
 		this.setState({ activeItem: name })
+	};
+
+	findBook = (e) => {
+		this.props.dispatch(setQeryAC(e.target.value));
+		this.setState({ searchQuery: e.target.value })
+
 	};
 
 	render() {
@@ -33,7 +38,7 @@ class FilterMenu extends React.PureComponent {
 					name="price_high"
 					active={activeItem === 'price_high'}
 					onClick={this.handleItemClick}
-				>Цена(дорогие)</Menu.Item>
+				>Цена (дорогие)</Menu.Item>
 				<Menu.Item
 					name="price_low"
 					active={activeItem === 'price_low'}
@@ -45,9 +50,11 @@ class FilterMenu extends React.PureComponent {
 					onClick={this.handleItemClick}
 				>Автор</Menu.Item>
 				<Menu.Item>
-					<Input icon="search" placeholder="Введтите запрос" onChange={e => setQeryAC(e.target.value)}></Input>
+					<Input icon="search" placeholder="Введите запрос" value={this.state.searchQuery} onChange={this.findBook}></Input>
+
 				</Menu.Item>
-			</Menu>
+
+			</Menu >
 		)
 	}
 
@@ -57,5 +64,9 @@ const mapStateToProps = function (state) {
 		books: state.books,
 	};
 };
+// const mapDispatchToProps = dispatch => ({
+// 	setQeryAC: value => dispatch(setQeryAC(value)),
+// 	setFilterAC: name => dispatch(setFilterAC(name)),
+// });
 
 export default connect(mapStateToProps)(FilterMenu);

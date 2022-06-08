@@ -5,7 +5,7 @@ const initState = {
 	status: 0, // 0 - ничего не началось, 1 - идёт загрузка, 2 - была ошибка, 3 - данные загружены
 	data: null,
 	filterBy: "all",
-	searchqury: ","
+	searchqury: "",
 }
 
 function booksReducer(state = initState, action) {
@@ -42,11 +42,10 @@ function booksReducer(state = initState, action) {
 
 		};
 		case SET_QERY: {
-			let newState = { ...state };
-			newState.data.filter(book => {
-				console.log(action.value)
-				return book.title.includes(action.value)
-			})
+			return {
+				...state,
+				searchqury: action.value
+			}
 		}
 		default:
 			return state;
@@ -54,3 +53,10 @@ function booksReducer(state = initState, action) {
 }
 
 export default booksReducer;
+
+
+// let newState = { ...state };
+// newState.data.filter(book => {
+// 	console.log(action.value)
+// 	return book.title.includes(action.value)
+// })

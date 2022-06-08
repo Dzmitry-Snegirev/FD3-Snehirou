@@ -33,7 +33,6 @@ const setQeryAC = function (value) {
 	return {
 		type: SET_QERY,
 		value: value,
-		//booksStart: books,
 	};
 }
 
