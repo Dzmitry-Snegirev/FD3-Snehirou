@@ -1,13 +1,20 @@
 import React from 'react';
-import { Menu } from 'semantic-ui-react'
+import { Menu, Popup } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import MenuBasket from './MenuBasket';
 
 class MenuTop extends React.PureComponent {
+
 	render() {
+		let basketData = [...this.props.basket.items];
+		let totalPrice = basketData.reduce((total, book) => total + book.price, 0);
+		let count = basketData.length;
+
+
 		return (
 			<Menu>
 				<Menu.Item
 					name='browse'
-					onClick={this.handleItemClick}
 				>
 					Магазин книг
 				</Menu.Item>
@@ -15,17 +22,22 @@ class MenuTop extends React.PureComponent {
 				<Menu.Menu position='right'>
 					<Menu.Item
 						name='signup'
-						onClick={this.handleItemClick}
 					>
-						Итого: &nbsp; <b>0</b>&nbsp;руб.
+						Итого: &nbsp; <b>{totalPrice}</b>&nbsp;руб.
 					</Menu.Item>
 
-					<Menu.Item
-						name='help'
-						onClick={this.handleItemClick}
-					>
-						Корзина (<b>0</b>)
-					</Menu.Item>
+					<Popup
+						trigger={
+							<Menu.Item name="help">
+								Корзина (<b>{count}</b>)
+							</Menu.Item>
+						}
+						content={items.map(book => (
+							<MenuBasket {...book} />
+						))}
+						on="click"
+						hideOnScroll
+					/>
 				</Menu.Menu>
 			</Menu>
 		);
@@ -34,4 +46,18 @@ class MenuTop extends React.PureComponent {
 
 }
 
-export default MenuTop;
+
+const mapStateToProps = function (state) {
+	return {
+		basket: state.basket,
+	};
+};
+// const mapDispatchToProps = dispatch => ({
+// 	setQeryAC: value => dispatch(setQeryAC(value)),
+// 	setFilterAC: name => dispatch(setFilterAC(name)),
+// });
+
+export default connect(mapStateToProps)(MenuTop);
+
+
+

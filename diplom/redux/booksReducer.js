@@ -55,8 +55,3 @@ function booksReducer(state = initState, action) {
 export default booksReducer;
 
 
-// let newState = { ...state };
-// newState.data.filter(book => {
-// 	console.log(action.value)
-// 	return book.title.includes(action.value)
-// })

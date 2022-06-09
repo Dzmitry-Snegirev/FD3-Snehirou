@@ -5,7 +5,7 @@ import cardReducer from "./cardReducer";
 
 let combinedReducer = combineReducers({
 	books: booksReducer,
-	//	basket: cardReducer,
+	basket: cardReducer,
 	// редьюсер countriesReducer отвечает за раздел state под именем books
 	// + другие редьюсеры
 });
