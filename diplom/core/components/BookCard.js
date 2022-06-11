@@ -7,14 +7,18 @@ class BookCard extends React.PureComponent {
 
 
 	addToCard = () => {
-		this.props.dispatch(addToCart(this.props));
-	};
-
-
+		let isItemCardInCard = this.props.basket.items.some(item => item.id === this.props.id);
+		if (isItemCardInCard) {
+			this.props.dispatch(removeFromCart(this.props.id));
+		}
+		else {
+			this.props.dispatch(addToCart(this.props));
+		}
+	}
 	render() {
 		let basketData = [...this.props.basket.items];
 		let addedCount = basketData.reduce((count, book) => count + (book.id === this.props.id ? 1 : 0), 0);
-
+		var isItemCardInCard = basketData.some(item => item.id === this.props.id);
 		return (
 			<Card>
 				<Image src={this.props.image} />
@@ -23,7 +27,6 @@ class BookCard extends React.PureComponent {
 					<Card.Meta>
 						<span className='date'>{this.props.author}</span>
 					</Card.Meta>
-
 				</Card.Content>
 				<Card.Content extra>
 					<a>
@@ -31,10 +34,12 @@ class BookCard extends React.PureComponent {
 						{this.props.price}
 					</a>
 				</Card.Content>
-				<Button onClick={this.addToCard.bind(this)}>Добавить в корзину{addedCount > 0 && `(${addedCount})`}</Button>
+				<Button onClick={this.addToCard}
+					style={{ backgroundColor: (isItemCardInCard) ? 'darkseagreen' : '#cacbcd' }}>
+					{isItemCardInCard ? "Удалить из корзины" : "Добавить в корзину"}
+				</Button>
 			</Card>
 		);
-
 	}
 
 }

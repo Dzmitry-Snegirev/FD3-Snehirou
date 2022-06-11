@@ -1,26 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { List, Button, Image } from "semantic-ui-react";
-
+import { removeFromCart, } from '../../redux/cardAC';
 
 class MenuBasket extends React.PureComponent {
 
+
+	removeCard = (e, { }) => {
+		this.props.dispatch(removeFromCart(this.props.id));
+	};
+
 	render() {
-		// let basketData = [...this.props.basket.items];
-		// let totalPrice = basketData.reduce((total, book) => total + book.price, 0);
-		// let count = basketData.length;
 
 
 		return (
+
 			<List selection divided verticalAlign="middle">
 				<List.Item>
 					<List.Content floated="right">
-						<Button onClick={removeFromCart.bind(this, id)} color="red">
+						<Button onClick={this.removeCard} color="red">
 							Удалить
 						</Button>
 					</List.Content>
-					<Image avatar src={image} />
-					<List.Content>{title}</List.Content>
+					<Image avatar src={this.props.image} />
 				</List.Item>
 			</List>
 		);

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Menu, Popup } from 'semantic-ui-react';
+import { Menu, Popup, } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import MenuBasket from './MenuBasket';
 
 class MenuTop extends React.PureComponent {
 
 	render() {
+
 		let basketData = [...this.props.basket.items];
 		let totalPrice = basketData.reduce((total, book) => total + book.price, 0);
 		let count = basketData.length;
@@ -32,9 +33,7 @@ class MenuTop extends React.PureComponent {
 								Корзина (<b>{count}</b>)
 							</Menu.Item>
 						}
-						content={items.map(book => (
-							<MenuBasket {...book} />
-						))}
+						content={basketData.map((book) => <MenuBasket {...book} key={book.id} />)}
 						on="click"
 						hideOnScroll
 					/>
