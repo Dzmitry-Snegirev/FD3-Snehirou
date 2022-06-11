@@ -151,6 +151,102 @@
 			"image": "https://cv1.litres.ru/sbc/14195715_cover_185-elektronnaya-kniga-dzhonatan-henkok-kak-trenirovat-pamyat-ne-dumayte-o-pamyati-luchshe-ispolzuyte-ee-na-vse-sto.jpg",
 			"price": 399,
 			"rating": 5
+		},
+		{
+			"id": 20,
+			"title": "Как тренировать память. Не думайте о памяти – лучше используйте ее на все сто!",
+			"author": "Джонатан Хэнкок",
+			"image": "https://cv9.litres.ru/pub/c/elektronnaya-kniga/cover_415/62780292-olga-primachenko-k-sebe-nezhno-kniga-o-tom-kak-cenit-i-berech-sebya.jpg",
+			"price": 399,
+			"rating": 5
+		},
+		{
+			"id": 21,
+			"title": "Как тренировать память. Не думайте о памяти – лучше используйте ее на все сто!",
+			"author": "Джонатан Хэнкок",
+			"image": "https://cv0.litres.ru/pub/c/elektronnaya-kniga/cover_415/67507101-mari-hermanson-chumnoy-ostrov.jpg",
+			"price": 399,
+			"rating": 5
+		},
+		{
+			"id": 22,
+			"title": "Как тренировать память. Не думайте о памяти – лучше используйте ее на все сто!",
+			"author": "Джонатан Хэнкок",
+			"image": "https://cv1.litres.ru/sbc/14195715_cover_185-elektronnaya-kniga-dzhonatan-henkok-kak-trenirovat-pamyat-ne-dumayte-o-pamyati-luchshe-ispolzuyte-ee-na-vse-sto.jpg",
+			"price": 399,
+			"rating": 5
+		},
+		{
+			"id": 23,
+			"title": "Как тренировать память. Не думайте о памяти – лучше используйте ее на все сто!",
+			"author": "Джонатан Хэнкок",
+			"image": "https://cv1.litres.ru/sbc/14195715_cover_185-elektronnaya-kniga-dzhonatan-henkok-kak-trenirovat-pamyat-ne-dumayte-o-pamyati-luchshe-ispolzuyte-ee-na-vse-sto.jpg",
+			"price": 399,
+			"rating": 5
+		},
+		{
+			"id": 24,
+			"title": "Как тренировать память. Не думайте о памяти – лучше используйте ее на все сто!",
+			"author": "Джонатан Хэнкок",
+			"image": "https://cv4.litres.ru/pub/c/elektronnaya-kniga/cover_415/67472046-tatyana-ustinova-oplachennyy-diagnoz.jpg",
+			"price": 399,
+			"rating": 5
+		},
+		{
+			"id": 25,
+			"title": "Как тренировать память. Не думайте о памяти – лучше используйте ее на все сто!",
+			"author": "Джонатан Хэнкок",
+			"image": "https://cv9.litres.ru/pub/c/elektronnaya-kniga/cover_415/66316598-tatyana-ustinova-mini-model.jpg",
+			"price": 399,
+			"rating": 5
+		},
+		{
+			"id": 26,
+			"title": "Как тренировать память. Не думайте о памяти – лучше используйте ее на все сто!",
+			"author": "Джонатан Хэнкок",
+			"image": "https://cv6.litres.ru/pub/c/elektronnaya-kniga/cover_415/67240368-pavel-alekseevich-astahov-klass-istoriya-odnogo-kolumbayna.jpg",
+			"price": 399,
+			"rating": 5
+		},
+		{
+			"id": 27,
+			"title": "Как тренировать память. Не думайте о памяти – лучше используйте ее на все сто!",
+			"author": "Джонатан Хэнкок",
+			"image": "https://cv1.litres.ru/pub/c/elektronnaya-kniga/cover_415/65940910-pavel-alekseevich-astahov-nasledniki.jpg",
+			"price": 399,
+			"rating": 5
+		},
+		{
+			"id": 28,
+			"title": "Как тренировать память. Не думайте о памяти – лучше используйте ее на все сто!",
+			"author": "Джонатан Хэнкок",
+			"image": "https://cv6.litres.ru/pub/c/elektronnaya-kniga/cover_415/67303161-stiven-king-billi-sammers.jpg",
+			"price": 399,
+			"rating": 5
+		},
+		{
+			"id": 29,
+			"title": "Как тренировать память. Не думайте о памяти – лучше используйте ее на все сто!",
+			"author": "Джонатан Хэнкок",
+			"image": "https://cv2.litres.ru/pub/c/elektronnaya-kniga/cover_415/67633220-deniel-meyson-32060691-zimniy-soldat.jpg",
+			"price": 399,
+			"rating": 5
+		},
+		{
+			"id": 30,
+			"title": "Как тренировать память. Не думайте о памяти – лучше используйте ее на все сто!",
+			"author": "Джонатан Хэнкок",
+			"image": "https://cv1.litres.ru/sbc/14195715_cover_185-elektronnaya-kniga-dzhonatan-henkok-kak-trenirovat-pamyat-ne-dumayte-o-pamyati-luchshe-ispolzuyte-ee-na-vse-sto.jpg",
+			"price": 399,
+			"rating": 5
+		},
+		{
+			"id": 31,
+			"title": "Как тренировать память. Не думайте о памяти – лучше используйте ее на все сто!",
+			"author": "Джонатан Хэнкок",
+			"image": "https://cv0.litres.ru/pub/c/elektronnaya-kniga/cover_415/67507101-mari-hermanson-chumnoy-ostrov.jpg",
+			"price": 399,
+			"rating": 5
 		}
 	]
 }
